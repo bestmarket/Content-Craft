@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm install && pnpm --filter @workspace/api-server run build:vercel && pnpm --filter @workspace/content-studio run build && pnpm --filter @workspace/db exec drizzle-kit push",
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/handler.mjs" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

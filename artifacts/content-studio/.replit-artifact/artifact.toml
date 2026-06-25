@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "ViralCraft Studio"
+version = "1.0.0"
+id = "artifacts/content-studio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19046
+
+[services.development]
+run = "pnpm --filter @workspace/content-studio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/content-studio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/content-studio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19046"
+BASE_PATH = "/"

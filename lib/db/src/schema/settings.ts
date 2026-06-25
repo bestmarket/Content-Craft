@@ -1,0 +1,14 @@
+import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { z } from "zod/v4";
+
+export const settingsTable = pgTable("settings", {
+  key: text("key").primaryKey(),
+  value: text("value").notNull().default(""),
+  label: text("label"),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const insertSettingSchema = createInsertSchema(settingsTable);
+export type InsertSetting = z.infer<typeof insertSettingSchema>;
+export type Setting = typeof settingsTable.$inferSelect;

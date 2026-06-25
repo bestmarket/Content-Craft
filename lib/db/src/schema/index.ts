@@ -1,20 +1,31 @@
-// Export your models here. Add one export per file
-// export * from "./posts";
-//
-// Each model/table should ideally be split into different files.
-// Each model/table should define a Drizzle table, insert schema, and types:
-//
-//   import { pgTable, text, serial } from "drizzle-orm/pg-core";
-//   import { createInsertSchema } from "drizzle-zod";
-//   import { z } from "zod/v4";
-//
-//   export const postsTable = pgTable("posts", {
-//     id: serial("id").primaryKey(),
-//     title: text("title").notNull(),
-//   });
-//
-//   export const insertPostSchema = createInsertSchema(postsTable).omit({ id: true });
-//   export type InsertPost = z.infer<typeof insertPostSchema>;
-//   export type Post = typeof postsTable.$inferSelect;
-
-export {}
+export * from "./users";
+export * from "./prompts";
+export * from "./content";
+export * from "./pdfs";
+export * from "./api-keys";
+export * from "./payment-gateways";
+export * from "./features";
+export * from "./settings";
+export * from "./chat";
+export * from "./products";
+export * from "./wallet";
+export * from "./subscriptions";
+export * from "./orders";
+export * from "./pages";
+export * from "./affiliate";
+export * from "./automations";
+export * from "./email-marketing";
+export * from "./revenue";
+export * from "./voice";
+export * from "./video-jobs";
+export * from "./scryvox";
+export * from "./templates";
+export * from "./affiliate-programs";
+export * from "./ai-agents";
+export * from "./custom-offers";
+export * from "./coding-projects";
+export * from "./project-files";
+export * from "./saas-builder";
+export * from "./video-marketing";
+export * from "./user-feature-overrides";
+export * from "./courses";
