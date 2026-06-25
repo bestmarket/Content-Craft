@@ -4,10 +4,10 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
-const rawPort = process.env.PORT;
-if (!rawPort) {
-  throw new Error("PORT environment variable is required but was not provided.");
-}
+// PORT is required for dev/preview server (injected by Replit artifact workflow).
+// During a Vite build (e.g. Vercel CI) it is not set — that's fine because
+// server.port is irrelevant for static builds. Use 5173 as a safe fallback.
+const rawPort = process.env.PORT ?? "5173";
 const port = Number(rawPort);
 if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
