@@ -1,1 +1,2 @@
 - [ViralCraft Studio import](viralcraft-import.md) — GitHub import quirks, Vite PORT handling, and push-to-deploy setup for this project.
+- [Prompt Studio studioBundle shape](studio-bundle-shape.md) — studioBundle nests PromptBundle under `bundle`; all routes must do `parsed.bundle ?? parsed` to extract it.
