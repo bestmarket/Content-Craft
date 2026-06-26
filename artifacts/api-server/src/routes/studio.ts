@@ -452,7 +452,7 @@ async function runPipeline(productId: number, inputs: {
     // Generate cover image (parallel with scoring)
     let coverImageUrl: string | null = inputs.authorPhotoUrl ?? null;
     try {
-      const coverUrl = await generateProductCoverImage(arch.title ?? inputs.topic, "digital_product");
+      const coverUrl = await generateProductCoverImage({ title: arch.title ?? inputs.topic, topic: inputs.topic, type: "digital_product" });
       if (coverUrl) coverImageUrl = coverUrl;
     } catch (_) { /* non-fatal */ }
 

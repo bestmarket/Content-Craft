@@ -67,8 +67,8 @@ Write a 4-part viral video script. Return ONLY valid JSON, no markdown, no expla
   "fullScript": "Complete script as one flowing narrative (all 4 parts combined, natural spoken language, 80-120 words total)"
 }`;
 
-  const result = await callGeminiFallback(prompt, "video_agent");
-  const text = result.text.trim().replace(/^```json\s*/i, "").replace(/```\s*$/, "").trim();
+  const result = await callGeminiFallback([{ role: "user", content: prompt }], "You are an elite viral video marketing scriptwriter.", 2048, "video_agent");
+  const text = (result?.text ?? "").trim().replace(/^```json\s*/i, "").replace(/```\s*$/, "").trim();
 
   try {
     const parsed = JSON.parse(text);
@@ -115,7 +115,7 @@ async function getVoiceEngineStatus(jobKey: string): Promise<{ status: string; p
   try {
     const res = await fetch(`${VOICE_ENGINE}/video/status/${jobKey}`);
     if (!res.ok) return null;
-    return await res.json();
+    return await res.json() as { status: string; progress: number; message: string };
   } catch { return null; }
 }
 
@@ -148,9 +148,9 @@ router.post("/video-agent/generate", requireAuth, requireCredits("ai_video"), as
     let productName = niche;
     let productDesc = "";
     if (productId) {
-      const [prod] = await db.select({ name: productsTable.name, description: productsTable.description })
+      const [prod] = await db.select({ title: productsTable.title, description: productsTable.description })
         .from(productsTable).where(eq(productsTable.id, Number(productId))).limit(1);
-      if (prod) { productName = prod.name; productDesc = prod.description ?? ""; }
+      if (prod) { productName = prod.title; productDesc = prod.description ?? ""; }
     }
 
     // Generate AI script

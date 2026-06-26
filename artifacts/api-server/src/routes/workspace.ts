@@ -159,10 +159,10 @@ function detectLanguage(filename: string): string {
 
 // ── PUBLIC: GET /workspace/preview/:token ────────────────────────────────────
 // No auth required — anyone with the token can view the live demo
-router.get("/workspace/preview/:token", async (req, res) => {
+router.get("/workspace/preview/:token", async (req: any, res) => {
   try {
     const { token } = req.params;
-    if (!token || token.length < 8) return res.status(400).json({ error: "Invalid token" });
+    if (!token || token.length < 8) res.status(400).json({ error: "Invalid token" }); return;
 
     const [project] = await db
       .select()
@@ -170,7 +170,7 @@ router.get("/workspace/preview/:token", async (req, res) => {
       .where(eq(codingProjectsTable.shareToken, token))
       .limit(1);
 
-    if (!project) return res.status(404).json({ error: "Preview not found or sharing has been disabled" });
+    if (!project) res.status(404).json({ error: "Preview not found or sharing has been disabled" }); return;
 
     const files = await db
       .select()
@@ -199,14 +199,14 @@ router.get("/workspace/preview/:token", async (req, res) => {
 });
 
 // POST /workspace/projects/:id/share — enable sharing (generate token)
-router.post("/workspace/projects/:id/share", requireAuth, async (req, res) => {
+router.post("/workspace/projects/:id/share", requireAuth, async (req: any, res) => {
   try {
     const id = parseInt(req.params.id);
     const [project] = await db
       .select()
       .from(codingProjectsTable)
       .where(and(eq(codingProjectsTable.id, id), eq(codingProjectsTable.userId, req.userId!)));
-    if (!project) return res.status(404).json({ error: "Project not found" });
+    if (!project) res.status(404).json({ error: "Project not found" }); return;
 
     // If already shared, return existing token; otherwise generate fresh one
     const token = project.shareToken ?? randomUUID();
@@ -225,14 +225,14 @@ router.post("/workspace/projects/:id/share", requireAuth, async (req, res) => {
 });
 
 // DELETE /workspace/projects/:id/share — revoke sharing
-router.delete("/workspace/projects/:id/share", requireAuth, async (req, res) => {
+router.delete("/workspace/projects/:id/share", requireAuth, async (req: any, res) => {
   try {
     const id = parseInt(req.params.id);
     const [project] = await db
       .select()
       .from(codingProjectsTable)
       .where(and(eq(codingProjectsTable.id, id), eq(codingProjectsTable.userId, req.userId!)));
-    if (!project) return res.status(404).json({ error: "Project not found" });
+    if (!project) res.status(404).json({ error: "Project not found" }); return;
 
     await db
       .update(codingProjectsTable)
@@ -247,7 +247,7 @@ router.delete("/workspace/projects/:id/share", requireAuth, async (req, res) => 
 });
 
 // GET /workspace/projects
-router.get("/workspace/projects", requireAuth, async (req, res) => {
+router.get("/workspace/projects", requireAuth, async (req: any, res) => {
   try {
     const projects = await db
       .select()
@@ -262,10 +262,10 @@ router.get("/workspace/projects", requireAuth, async (req, res) => {
 });
 
 // POST /workspace/projects — create + AI generate
-router.post("/workspace/projects", requireAuth, async (req, res) => {
+router.post("/workspace/projects", requireAuth, async (req: any, res) => {
   const { name, description, projectType = "web" } = req.body;
   if (!description?.trim()) {
-    return res.status(400).json({ error: "Description is required" });
+    res.status(400).json({ error: "Description is required" }); return;
   }
 
   try {
@@ -289,11 +289,11 @@ router.post("/workspace/projects", requireAuth, async (req, res) => {
         .update(codingProjectsTable)
         .set({ status: "error", updatedAt: new Date() })
         .where(eq(codingProjectsTable.id, project.id));
-      return res.status(500).json({ error: "AI generation failed — check API keys in admin" });
+      res.status(500).json({ error: "AI generation failed — check API keys in admin" }); return;
     }
 
     // Insert generated files
-    const fileRows = generated.files.map(f => ({
+    const fileRows = generated!.files.map((f: any) => ({
       projectId: project.id,
       path: f.path,
       name: f.name,
@@ -334,14 +334,14 @@ router.post("/workspace/projects", requireAuth, async (req, res) => {
 });
 
 // GET /workspace/projects/:id
-router.get("/workspace/projects/:id", requireAuth, async (req, res) => {
+router.get("/workspace/projects/:id", requireAuth, async (req: any, res) => {
   try {
     const id = parseInt(req.params.id);
     const [project] = await db
       .select()
       .from(codingProjectsTable)
       .where(and(eq(codingProjectsTable.id, id), eq(codingProjectsTable.userId, req.userId!)));
-    if (!project) return res.status(404).json({ error: "Project not found" });
+    if (!project) res.status(404).json({ error: "Project not found" }); return;
 
     const files = await db
       .select()
@@ -357,14 +357,14 @@ router.get("/workspace/projects/:id", requireAuth, async (req, res) => {
 });
 
 // DELETE /workspace/projects/:id
-router.delete("/workspace/projects/:id", requireAuth, async (req, res) => {
+router.delete("/workspace/projects/:id", requireAuth, async (req: any, res) => {
   try {
     const id = parseInt(req.params.id);
     const [project] = await db
       .select()
       .from(codingProjectsTable)
       .where(and(eq(codingProjectsTable.id, id), eq(codingProjectsTable.userId, req.userId!)));
-    if (!project) return res.status(404).json({ error: "Project not found" });
+    if (!project) res.status(404).json({ error: "Project not found" }); return;
 
     await db.delete(codingProjectsTable).where(eq(codingProjectsTable.id, id));
     res.json({ success: true });
@@ -375,7 +375,7 @@ router.delete("/workspace/projects/:id", requireAuth, async (req, res) => {
 });
 
 // PUT /workspace/projects/:id — update metadata
-router.put("/workspace/projects/:id", requireAuth, async (req, res) => {
+router.put("/workspace/projects/:id", requireAuth, async (req: any, res) => {
   try {
     const id = parseInt(req.params.id);
     const { name, description } = req.body;
@@ -383,7 +383,7 @@ router.put("/workspace/projects/:id", requireAuth, async (req, res) => {
       .select()
       .from(codingProjectsTable)
       .where(and(eq(codingProjectsTable.id, id), eq(codingProjectsTable.userId, req.userId!)));
-    if (!project) return res.status(404).json({ error: "Project not found" });
+    if (!project) res.status(404).json({ error: "Project not found" }); return;
 
     const [updated] = await db
       .update(codingProjectsTable)
@@ -398,17 +398,17 @@ router.put("/workspace/projects/:id", requireAuth, async (req, res) => {
 });
 
 // POST /workspace/projects/:id/files — add file
-router.post("/workspace/projects/:id/files", requireAuth, async (req, res) => {
+router.post("/workspace/projects/:id/files", requireAuth, async (req: any, res) => {
   try {
     const projectId = parseInt(req.params.id);
     const [project] = await db
       .select()
       .from(codingProjectsTable)
       .where(and(eq(codingProjectsTable.id, projectId), eq(codingProjectsTable.userId, req.userId!)));
-    if (!project) return res.status(404).json({ error: "Project not found" });
+    if (!project) res.status(404).json({ error: "Project not found" }); return;
 
     const { path, name, content = "", isEntrypoint = false } = req.body;
-    if (!path || !name) return res.status(400).json({ error: "path and name required" });
+    if (!path || !name) res.status(400).json({ error: "path and name required" }); return;
 
     const [file] = await db.insert(projectFilesTable).values({
       projectId,
@@ -428,7 +428,7 @@ router.post("/workspace/projects/:id/files", requireAuth, async (req, res) => {
 });
 
 // PUT /workspace/projects/:id/files/:fileId — update file content
-router.put("/workspace/projects/:id/files/:fileId", requireAuth, async (req, res) => {
+router.put("/workspace/projects/:id/files/:fileId", requireAuth, async (req: any, res) => {
   try {
     const projectId = parseInt(req.params.id);
     const fileId = parseInt(req.params.fileId);
@@ -436,7 +436,7 @@ router.put("/workspace/projects/:id/files/:fileId", requireAuth, async (req, res
       .select()
       .from(codingProjectsTable)
       .where(and(eq(codingProjectsTable.id, projectId), eq(codingProjectsTable.userId, req.userId!)));
-    if (!project) return res.status(404).json({ error: "Project not found" });
+    if (!project) res.status(404).json({ error: "Project not found" }); return;
 
     const { content, name } = req.body;
     const [file] = await db
@@ -454,7 +454,7 @@ router.put("/workspace/projects/:id/files/:fileId", requireAuth, async (req, res
 });
 
 // DELETE /workspace/projects/:id/files/:fileId
-router.delete("/workspace/projects/:id/files/:fileId", requireAuth, async (req, res) => {
+router.delete("/workspace/projects/:id/files/:fileId", requireAuth, async (req: any, res) => {
   try {
     const projectId = parseInt(req.params.id);
     const fileId = parseInt(req.params.fileId);
@@ -462,7 +462,7 @@ router.delete("/workspace/projects/:id/files/:fileId", requireAuth, async (req, 
       .select()
       .from(codingProjectsTable)
       .where(and(eq(codingProjectsTable.id, projectId), eq(codingProjectsTable.userId, req.userId!)));
-    if (!project) return res.status(404).json({ error: "Project not found" });
+    if (!project) res.status(404).json({ error: "Project not found" }); return;
 
     await db
       .delete(projectFilesTable)
@@ -476,17 +476,17 @@ router.delete("/workspace/projects/:id/files/:fileId", requireAuth, async (req, 
 });
 
 // POST /workspace/projects/:id/chat — AI chat to edit project
-router.post("/workspace/projects/:id/chat", requireAuth, async (req, res) => {
+router.post("/workspace/projects/:id/chat", requireAuth, async (req: any, res) => {
   try {
     const projectId = parseInt(req.params.id);
     const { message } = req.body;
-    if (!message?.trim()) return res.status(400).json({ error: "Message required" });
+    if (!message?.trim()) res.status(400).json({ error: "Message required" }); return;
 
     const [project] = await db
       .select()
       .from(codingProjectsTable)
       .where(and(eq(codingProjectsTable.id, projectId), eq(codingProjectsTable.userId, req.userId!)));
-    if (!project) return res.status(404).json({ error: "Project not found" });
+    if (!project) res.status(404).json({ error: "Project not found" }); return;
 
     const files = await db
       .select()
@@ -501,17 +501,17 @@ router.post("/workspace/projects/:id/chat", requireAuth, async (req, res) => {
     );
 
     if (!result) {
-      return res.status(500).json({ error: "AI failed — check API keys in admin" });
+      res.status(500).json({ error: "AI failed — check API keys in admin" }); return;
     }
 
     // Apply modifications
-    const allModified = [...(result.modifiedFiles ?? []), ...(result.newFiles ?? [])];
+    const allModified = [...(result!.modifiedFiles ?? []), ...(result!.newFiles ?? [])];
     for (const mf of allModified) {
       const existing = files.find(f => f.path === mf.path);
       if (existing) {
         await db.update(projectFilesTable)
           .set({ content: mf.content, updatedAt: new Date() })
-          .where(eq(projectFilesTable.id, existing.id));
+          .where(eq(projectFilesTable.id, (existing as any).id));
       } else {
         await db.insert(projectFilesTable).values({
           projectId,
@@ -525,10 +525,10 @@ router.post("/workspace/projects/:id/chat", requireAuth, async (req, res) => {
     }
 
     // Delete files
-    for (const dp of result.deletedPaths ?? []) {
+    for (const dp of result!.deletedPaths ?? []) {
       const existing = files.find(f => f.path === dp);
       if (existing) {
-        await db.delete(projectFilesTable).where(eq(projectFilesTable.id, existing.id));
+        await db.delete(projectFilesTable).where(eq(projectFilesTable.id, existing!.id));
       }
     }
 
@@ -536,7 +536,7 @@ router.post("/workspace/projects/:id/chat", requireAuth, async (req, res) => {
     const newHistory = [
       ...history,
       { role: "user", content: message.trim(), ts: new Date().toISOString() },
-      { role: "assistant", content: result.message, ts: new Date().toISOString() },
+      { role: "assistant", content: (result as any).message, ts: new Date().toISOString() },
     ].slice(-30);
 
     await db.update(codingProjectsTable)
@@ -551,10 +551,10 @@ router.post("/workspace/projects/:id/chat", requireAuth, async (req, res) => {
       .orderBy(projectFilesTable.path);
 
     res.json({
-      message: result.message,
+      message: result!.message,
       files: updatedFiles,
-      modifiedPaths: allModified.map(f => f.path),
-      deletedPaths: result.deletedPaths ?? [],
+      modifiedPaths: allModified.map((f: any) => f.path),
+      deletedPaths: result!.deletedPaths ?? [],
     });
   } catch (err) {
     console.error(err);
@@ -563,14 +563,14 @@ router.post("/workspace/projects/:id/chat", requireAuth, async (req, res) => {
 });
 
 // POST /workspace/projects/:id/regenerate — full AI regeneration
-router.post("/workspace/projects/:id/regenerate", requireAuth, async (req, res) => {
+router.post("/workspace/projects/:id/regenerate", requireAuth, async (req: any, res) => {
   try {
     const projectId = parseInt(req.params.id);
     const [project] = await db
       .select()
       .from(codingProjectsTable)
       .where(and(eq(codingProjectsTable.id, projectId), eq(codingProjectsTable.userId, req.userId!)));
-    if (!project) return res.status(404).json({ error: "Project not found" });
+    if (!project) res.status(404).json({ error: "Project not found" }); return;
 
     await db.update(codingProjectsTable).set({ status: "generating" }).where(eq(codingProjectsTable.id, projectId));
 
@@ -581,13 +581,13 @@ router.post("/workspace/projects/:id/regenerate", requireAuth, async (req, res) 
 
     if (!generated) {
       await db.update(codingProjectsTable).set({ status: "error" }).where(eq(codingProjectsTable.id, projectId));
-      return res.status(500).json({ error: "AI generation failed" });
+      res.status(500).json({ error: "AI generation failed" }); return;
     }
 
     // Delete old files and insert new
     await db.delete(projectFilesTable).where(eq(projectFilesTable.projectId, projectId));
     await db.insert(projectFilesTable).values(
-      generated.files.map(f => ({
+      generated!.files.map((f: any) => ({
         projectId,
         path: f.path,
         name: f.name,
@@ -599,10 +599,10 @@ router.post("/workspace/projects/:id/regenerate", requireAuth, async (req, res) 
 
     const [updated] = await db.update(codingProjectsTable)
       .set({
-        framework: generated.framework,
-        language: generated.language,
-        previewType: generated.previewType,
-        readme: generated.readme,
+        framework: generated!.framework,
+        language: generated!.language,
+        previewType: generated!.previewType,
+        readme: generated!.readme,
         status: "ready",
         generationCount: (project.generationCount ?? 0) + 1,
         updatedAt: new Date(),
@@ -619,7 +619,7 @@ router.post("/workspace/projects/:id/regenerate", requireAuth, async (req, res) 
 });
 
 // POST /workspace/projects/:id/publish — publish to marketplace
-router.post("/workspace/projects/:id/publish", requireAuth, async (req, res) => {
+router.post("/workspace/projects/:id/publish", requireAuth, async (req: any, res) => {
   try {
     const projectId = parseInt(req.params.id);
     const { title, description, price = 0 } = req.body;
@@ -628,7 +628,7 @@ router.post("/workspace/projects/:id/publish", requireAuth, async (req, res) => 
       .select()
       .from(codingProjectsTable)
       .where(and(eq(codingProjectsTable.id, projectId), eq(codingProjectsTable.userId, req.userId!)));
-    if (!project) return res.status(404).json({ error: "Project not found" });
+    if (!project) res.status(404).json({ error: "Project not found" }); return;
 
     // Check hosting settings
     const [hostingSetting] = await db.select().from(settingsTable).where(eq(settingsTable.key, "workspace_hosting_enabled")).limit(1);
@@ -637,14 +637,14 @@ router.post("/workspace/projects/:id/publish", requireAuth, async (req, res) => 
     // Create or update marketplace product
     if (project.publishedProductId) {
       await db.update(productsTable)
-        .set({ name: title || project.name, description: description || project.description, price: String(price), publishStatus: "published", isPublished: true, updatedAt: new Date() })
-        .where(eq(productsTable.id, project.publishedProductId));
-      return res.json({ success: true, productId: project.publishedProductId, hostingEnabled });
+        .set({ title: title || project.name, description: description || project.description, price: String(price), publishStatus: "published" as any, isPublished: true, updatedAt: new Date() })
+        .where(eq(productsTable.id, project.publishedProductId!));
+      res.json({ success: true, productId: project.publishedProductId, hostingEnabled }); return;
     }
 
     const [product] = await db.insert(productsTable).values({
       userId: req.userId!,
-      name: title || project.name,
+      title: title || project.name,
       description: description || project.description || "",
       price: String(price),
       productType: "code_project",

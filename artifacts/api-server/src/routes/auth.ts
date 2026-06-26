@@ -264,14 +264,14 @@ router.post("/auth/google", async (req, res) => {
 
     // Verify the Google ID token via Google's public endpoint
     const verifyRes = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${credential}`);
-    const payload = await verifyRes.json();
+    const payload = await verifyRes.json() as any;
 
     if (!verifyRes.ok || !payload.email_verified || payload.aud !== clientId) {
       res.status(401).json({ error: "Invalid Google token" }); return;
     }
 
-    const email = payload.email.toLowerCase();
-    const name = payload.name ?? email.split("@")[0];
+    const email = (payload.email as string).toLowerCase();
+    const name = (payload.name as string) ?? email.split("@")[0];
 
     // Find existing user or create one
     let [user] = await db.select().from(usersTable).where(eq(usersTable.email, email)).limit(1);

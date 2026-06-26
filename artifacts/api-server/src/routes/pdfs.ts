@@ -1003,9 +1003,9 @@ router.get("/pdfs/studio/history", requireAuth, async (req: any, res) => {
       .orderBy(desc(pdfHistoryTable.createdAt));
 
     const studio = items
-      .filter(i => { try { return JSON.parse(i.content)?._studio; } catch { return false; } })
+      .filter(i => { try { return JSON.parse(i.content ?? "")?._studio; } catch { return false; } })
       .map(i => {
-        const c = JSON.parse(i.content);
+        const c = JSON.parse(i.content ?? "{}");
         return {
           id: i.id,
           title: i.title,
@@ -1033,7 +1033,7 @@ router.get("/pdfs/studio/:id", requireAuth, async (req: any, res) => {
       res.status(404).json({ error: "Not found" });
       return;
     }
-    const content = JSON.parse(item.content);
+    const content = JSON.parse(item.content ?? "{}");
     res.json({ id: item.id, ...content });
   } catch (err) {
     res.status(500).json({ error: "Server error" });

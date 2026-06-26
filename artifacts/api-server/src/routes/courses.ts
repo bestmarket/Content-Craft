@@ -242,7 +242,7 @@ router.post("/courses", requireAuth, async (req: any, res) => {
           s + (m.lessons ?? []).reduce((ls: number, l: any) => ls + (l.content?.split(" ").length ?? 0), 0), 0);
 
         const imagePrompt = `Premium online course cover for "${generated.title ?? topic}", professional educational design, dark gradient background with gold/purple accents, bold typography, modern and high-value aesthetic, no text overlay`;
-        const coverImageUrl = await generateProductCoverImage(imagePrompt).catch(() =>
+        const coverImageUrl = await generateProductCoverImage({ title: generated.title ?? topic, topic, type: "course" }).catch(() =>
           `https://image.pollinations.ai/prompt/${encodeURIComponent(`premium course cover art ${topic} education professional dark gradient gold purple modern`)}`
         );
 

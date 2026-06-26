@@ -1481,7 +1481,7 @@ Return ONLY valid JSON: {"tiktok":[{"hook":"...","script":"...","caption":"...",
 }
 
 // ── SCRYVOX: chapter angle builder ────────────────────────────────────────────
-function buildChapterAngles(topic: string, frame: DeepFrame, count: number): string[] {
+function buildChapterAngles(topic: string, frame: any, count: number): string[] {
   const pool = [
     `${topic}: ${frame.firstPrinciplesBreakdown[0] ?? "foundational principles"}`,
     `${topic}: ${frame.wisdomPrinciples[0]?.applicationToTopic ?? "strategic wisdom"}`,
@@ -2362,7 +2362,6 @@ router.get("/orders/my-purchases", requireAuth, async (req: any, res) => {
         subtitle:     productsTable.subtitle,
         description:  productsTable.description,
         coverImageUrl:productsTable.coverImageUrl,
-        type:         productsTable.type,
         authorName:   productsTable.authorName,
       })
       .from(ordersTable)

@@ -219,7 +219,7 @@ function generateSlug(name: string): string {
 router.post("/saas/apps", requireAuth, async (req: any, res) => {
   try {
     const { niche, description, businessType = "saas_tool" } = req.body;
-    if (!niche || !description) return res.status(400).json({ error: "niche and description are required" });
+    if (!niche || !description) res.status(400).json({ error: "niche and description are required" }); return;
 
     const [draft] = await db.insert(saasAppsTable).values({
       creatorId: req.user.id,
@@ -278,7 +278,7 @@ router.get("/saas/apps/:id", requireAuth, async (req: any, res) => {
   try {
     const [app] = await db.select().from(saasAppsTable)
       .where(and(eq(saasAppsTable.id, Number(req.params.id)), eq(saasAppsTable.creatorId, req.user.id))).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
     res.json(app);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
@@ -289,7 +289,7 @@ router.put("/saas/apps/:id", requireAuth, async (req: any, res) => {
   try {
     const [app] = await db.select().from(saasAppsTable)
       .where(and(eq(saasAppsTable.id, Number(req.params.id)), eq(saasAppsTable.creatorId, req.user.id))).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
 
     const { name, tagline, brandColor, thankYouMessage, tiers, landingPage } = req.body;
     const [updated] = await db.update(saasAppsTable).set({
@@ -311,8 +311,8 @@ router.post("/saas/apps/:id/publish", requireAuth, async (req: any, res) => {
   try {
     const [app] = await db.select().from(saasAppsTable)
       .where(and(eq(saasAppsTable.id, Number(req.params.id)), eq(saasAppsTable.creatorId, req.user.id))).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
-    if (app.generationStatus !== "complete") return res.status(400).json({ error: "Generation not complete" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
+    if (app.generationStatus !== "complete") res.status(400).json({ error: "Generation not complete" }); return;
     const [updated] = await db.update(saasAppsTable).set({ status: "live", updatedAt: new Date() }).where(eq(saasAppsTable.id, app.id)).returning();
     res.json({ success: true, slug: updated.deploySlug, url: `/saas/${updated.deploySlug}` });
   } catch (err: any) {
@@ -324,7 +324,7 @@ router.post("/saas/apps/:id/unpublish", requireAuth, async (req: any, res) => {
   try {
     const [app] = await db.select().from(saasAppsTable)
       .where(and(eq(saasAppsTable.id, Number(req.params.id)), eq(saasAppsTable.creatorId, req.user.id))).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
     await db.update(saasAppsTable).set({ status: "draft", updatedAt: new Date() }).where(eq(saasAppsTable.id, app.id));
     res.json({ success: true });
   } catch (err: any) {
@@ -336,7 +336,7 @@ router.delete("/saas/apps/:id", requireAuth, async (req: any, res) => {
   try {
     const [app] = await db.select().from(saasAppsTable)
       .where(and(eq(saasAppsTable.id, Number(req.params.id)), eq(saasAppsTable.creatorId, req.user.id))).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
     await db.delete(saasAppsTable).where(eq(saasAppsTable.id, app.id));
     res.json({ success: true });
   } catch (err: any) {
@@ -348,7 +348,7 @@ router.get("/saas/apps/:id/subscribers", requireAuth, async (req: any, res) => {
   try {
     const [app] = await db.select().from(saasAppsTable)
       .where(and(eq(saasAppsTable.id, Number(req.params.id)), eq(saasAppsTable.creatorId, req.user.id))).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
     const subs = await db.select().from(saasSubscriptionsTable)
       .where(eq(saasSubscriptionsTable.appId, app.id))
       .orderBy(desc(saasSubscriptionsTable.createdAt));
@@ -362,7 +362,7 @@ router.post("/saas/apps/:id/regenerate", requireAuth, async (req: any, res) => {
   try {
     const [app] = await db.select().from(saasAppsTable)
       .where(and(eq(saasAppsTable.id, Number(req.params.id)), eq(saasAppsTable.creatorId, req.user.id))).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
     await db.update(saasAppsTable).set({ generationStatus: "generating", updatedAt: new Date() }).where(eq(saasAppsTable.id, app.id));
     res.json({ status: "generating" });
     (async () => {
@@ -387,7 +387,7 @@ router.post("/saas/apps/:id/youtube-script", requireAuth, async (req: any, res) 
   try {
     const [app] = await db.select().from(saasAppsTable)
       .where(and(eq(saasAppsTable.id, Number(req.params.id)), eq(saasAppsTable.creatorId, req.user.id))).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
 
     const { videoIdea } = req.body;
     const mp = app.marketingPlan as any;
@@ -433,10 +433,10 @@ Format the script exactly like this:
       "workspace",
     );
 
-    if (!result?.text) return res.status(500).json({ error: "Script generation failed" });
+    if (!result?.text) { res.status(500).json({ error: "Script generation failed" }); return; }
 
-    await db.update(saasAppsTable).set({ youtubeScript: result.text, updatedAt: new Date() }).where(eq(saasAppsTable.id, app.id));
-    res.json({ script: result.text });
+    await db.update(saasAppsTable).set({ youtubeScript: result!.text, updatedAt: new Date() }).where(eq(saasAppsTable.id, app.id));
+    res.json({ script: result!.text });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
@@ -448,7 +448,7 @@ router.post("/saas/apps/:id/thumbnail", requireAuth, async (req: any, res) => {
   try {
     const [app] = await db.select().from(saasAppsTable)
       .where(and(eq(saasAppsTable.id, Number(req.params.id)), eq(saasAppsTable.creatorId, req.user.id))).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
 
     const { topic } = req.body;
     const thumbTopic = topic || `${app.name} — ${app.tagline}`;
@@ -504,10 +504,10 @@ router.post("/saas/apps/:id/voiceover", requireAuth, async (req: any, res) => {
   try {
     const [app] = await db.select().from(saasAppsTable)
       .where(and(eq(saasAppsTable.id, Number(req.params.id)), eq(saasAppsTable.creatorId, req.user.id))).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
 
     const { text, voiceId = "am_adam", speed = 1.0 } = req.body;
-    if (!text) return res.status(400).json({ error: "text is required" });
+    if (!text) res.status(400).json({ error: "text is required" }); return;
 
     const voiceRes = await fetch(`${process.env.VOICE_ENGINE_URL ?? "http://localhost:8099"}/speak`, {
       method: "POST",
@@ -515,7 +515,7 @@ router.post("/saas/apps/:id/voiceover", requireAuth, async (req: any, res) => {
       body: JSON.stringify({ text: text.slice(0, 3000), voiceId, speed }),
     });
 
-    if (!voiceRes.ok) return res.status(502).json({ error: "Voice engine unavailable" });
+    if (!voiceRes.ok) res.status(502).json({ error: "Voice engine unavailable" }); return;
 
     const audioBuffer = Buffer.from(await voiceRes.arrayBuffer());
     res.set("Content-Type", "audio/wav");
@@ -529,7 +529,7 @@ router.post("/saas/apps/:id/voiceover", requireAuth, async (req: any, res) => {
 
 // ─── Public Routes ────────────────────────────────────────────────────────────
 
-router.get("/saas/public/:slug", async (req, res) => {
+router.get("/saas/public/:slug", async (req: any, res) => {
   try {
     const [app] = await db.select({
       id: saasAppsTable.id, name: saasAppsTable.name, tagline: saasAppsTable.tagline,
@@ -539,25 +539,25 @@ router.get("/saas/public/:slug", async (req, res) => {
       status: saasAppsTable.status, deploySlug: saasAppsTable.deploySlug,
       subscriberCount: saasAppsTable.subscriberCount, businessType: saasAppsTable.businessType,
     }).from(saasAppsTable).where(eq(saasAppsTable.deploySlug, req.params.slug)).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
-    if (app.status !== "live") return res.status(404).json({ error: "Not live yet" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
+    if (app.status !== "live") res.status(404).json({ error: "Not live yet" }); return;
     res.json(app);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
 });
 
-router.post("/saas/public/:slug/subscribe", async (req, res) => {
+router.post("/saas/public/:slug/subscribe", async (req: any, res) => {
   try {
     const { tierId, billingPeriod = "monthly", email, name } = req.body;
-    if (!email || !tierId) return res.status(400).json({ error: "email and tierId are required" });
+    if (!email || !tierId) res.status(400).json({ error: "email and tierId are required" }); return;
 
     const [app] = await db.select().from(saasAppsTable).where(eq(saasAppsTable.deploySlug, req.params.slug)).limit(1);
-    if (!app || app.status !== "live") return res.status(404).json({ error: "App not found" });
+    if (!app || app.status !== "live") res.status(404).json({ error: "App not found" }); return;
 
     const tiers = (app.tiers as any[]) || [];
     const tier = tiers.find((t: any) => t.id === tierId);
-    if (!tier) return res.status(400).json({ error: "Invalid tier" });
+    if (!tier) res.status(400).json({ error: "Invalid tier" }); return;
 
     let price = billingPeriod === "annual" ? tier.priceAnnual
       : billingPeriod === "lifetime" ? (tier.priceLifetime ?? tier.priceMonthly * 12)
@@ -593,15 +593,15 @@ router.post("/saas/public/:slug/subscribe", async (req, res) => {
   }
 });
 
-router.get("/saas/public/:slug/access/:token", async (req, res) => {
+router.get("/saas/public/:slug/access/:token", async (req: any, res) => {
   try {
     const [app] = await db.select().from(saasAppsTable).where(eq(saasAppsTable.deploySlug, req.params.slug)).limit(1);
-    if (!app) return res.status(404).json({ error: "App not found" });
+    if (!app) res.status(404).json({ error: "App not found" }); return;
 
     const [sub] = await db.select().from(saasSubscriptionsTable)
       .where(and(eq(saasSubscriptionsTable.appId, app.id), eq(saasSubscriptionsTable.accessToken, req.params.token), eq(saasSubscriptionsTable.status, "active")))
       .limit(1);
-    if (!sub) return res.status(403).json({ error: "Invalid or expired access token" });
+    if (!sub) res.status(403).json({ error: "Invalid or expired access token" }); return;
 
     res.json({ valid: true, tier: sub.tierName, email: sub.subscriberEmail, appHtml: app.appHtml, appName: app.name, brandColor: app.brandColor, businessType: app.businessType });
   } catch (err: any) {
@@ -648,14 +648,14 @@ router.get("/admin/saas/apps", requireAdmin, async (_req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-router.delete("/admin/saas/apps/:id", requireAdmin, async (req, res) => {
+router.delete("/admin/saas/apps/:id", requireAdmin, async (req: any, res) => {
   try {
     await db.delete(saasAppsTable).where(eq(saasAppsTable.id, Number(req.params.id)));
     res.json({ success: true });
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-router.post("/admin/saas/apps/:id/publish", requireAdmin, async (req, res) => {
+router.post("/admin/saas/apps/:id/publish", requireAdmin, async (req: any, res) => {
   try {
     const [updated] = await db.update(saasAppsTable).set({ status: "live", updatedAt: new Date() })
       .where(eq(saasAppsTable.id, Number(req.params.id))).returning();
@@ -663,7 +663,7 @@ router.post("/admin/saas/apps/:id/publish", requireAdmin, async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-router.post("/admin/saas/apps/:id/unpublish", requireAdmin, async (req, res) => {
+router.post("/admin/saas/apps/:id/unpublish", requireAdmin, async (req: any, res) => {
   try {
     await db.update(saasAppsTable).set({ status: "draft", updatedAt: new Date() })
       .where(eq(saasAppsTable.id, Number(req.params.id)));
