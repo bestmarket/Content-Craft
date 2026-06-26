@@ -95,6 +95,8 @@ const VideoAgentPage = lazy(() => import("@/pages/video-agent"));
 const CreditsPage = lazy(() => import("@/pages/credits"));
 const AdminCredits = lazy(() => import("@/pages/admin/credits"));
 const AdminToolFlags = lazy(() => import("@/pages/admin/tool-flags"));
+const ProductStudio = lazy(() => import("@/pages/product-studio"));
+const AdminKeys = lazy(() => import("@/pages/admin/keys"));
 
 // Workspace (AI Dev Studio) — full-screen, no AppLayout
 const WorkspaceHub = lazy(() => import("@/pages/workspace"));
@@ -253,6 +255,10 @@ function Router() {
           <Route path="/admin/media">{() => <ProtectedRoute component={AdminMedia} adminOnly />}</Route>
           <Route path="/admin/credits">{() => <ProtectedRoute component={AdminCredits} adminOnly />}</Route>
           <Route path="/admin/tools">{() => <ProtectedRoute component={AdminToolFlags} adminOnly />}</Route>
+          <Route path="/admin/keys">{() => <ProtectedRoute component={AdminKeys} adminOnly />}</Route>
+
+          {/* Product Studio */}
+          <Route path="/product-studio">{() => <ProtectedRoute component={ProductStudio} />}</Route>
 
           {/* Credits */}
           <Route path="/credits">{() => <ProtectedRoute component={CreditsPage} />}</Route>

@@ -1,0 +1,24 @@
+guide) along with an embedded high-conversion landing page structure.
+   - Stage E: Evaluate the final copy to assign an internal "Product Score" based on length, detail, and formatting density.
+   - Stage F: Compile the layout using HTML/CSS printable media specs to output a clean, high-resolution PDF file,  automatically packages the text into an elite, beautifully styled PDF with dynamic graphics, matching marketing materials, and an instant high-converting landing page.   saving the final download asset links into the database and flipping the product status to "PUBLISHED".
+
+
+
+Phase 4: Dynamic Creator Workspace & Live Dashboard UI
+
+
+1. Build out the frontend user workspace layout:
+   - Left Sidebar: Input configuration fields (Product Name, Subtitle, The angle or direction, Target Audience, Niche Selection, Author Name, and a file drag-and-drop element to upload an optional Author Image).
+   - Center Workspace: A premium live-updating workspace container. While the background process runs, show a dynamic loading tracker mapping real-time completion stages (e.g., [Step 1/4] Researching Niche Matrix... [Step 2/4] Formatting Core Chapters...).
+   - Right Preview Canvas: Once generation updates to "PUBLISHED", render the structural inline preview showing the generated 3D cover, product listing description, internal chapter samples, and the automated Product Quality Score badge.
+2. Build an Admin Panel interface at `/admin/keys` mapping clean, intuitive forms to the Phase 2 API routes, allowing the owner to monitor and manually add API keys onto the platform effortlessly.
+
+
+Phase 5: Marketplace Monetization & Split Checkout Rails
+
+1. On the Marketplace interface showcasing published platform books with high-conversion product card listings.
+2. Generate highly responsive public landing pages dynamically for every single published product based on the backend data blocks compiled in Phase 3.
+3. Embed an operational Payment Checkout button onto the generated landing page.
+4. Construct a secure payment webhook API route at `/api/webhooks/`. When a transaction verification event triggers:
+   - Parse the associated Product and Seller metadata.
+   - Extract the purchase fee and run the split logic: calculate your 20% platform commission rake, calculate the remaining 80% creator share according to sites tiers structure, register the transaction data securely into the database ledger, and unlock immediate product access to the buyer.

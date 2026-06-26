@@ -53,6 +53,8 @@ import r2AdminRouter from "./r2-admin";
 import creditsRouter from "./credits";
 import toolFlagsRouter from "./tool-flags";
 import coursesRouter from "./courses";
+import studioRouter from "./studio";
+import webhooksRouter from "./webhooks";
 
 const router: IRouter = Router();
 
@@ -110,5 +112,7 @@ router.use(r2AdminRouter);
 router.use(creditsRouter);
 router.use(toolFlagsRouter);
 router.use(coursesRouter);
+router.use(studioRouter);
+router.use(webhooksRouter);
 
 export default router;

@@ -46,6 +46,7 @@ const NAV_GROUPS = [
   {
     label: "Products", cat: "products",
     items: [
+      { href: "/product-studio",  label: "🚀 Product Studio",  icon: Sparkles,    tool: "product_generator" },
       { href: "/create-product", label: "Create Product",     icon: PackagePlus, tool: "product_generator" },
       { href: "/quick-launch",   label: "Quick Launch",       icon: Rocket,      tool: "product_generator" },
       { href: "/prompt-studio",  label: "Prompt Studio",      icon: Lightbulb,   tool: "prompt_generator"  },
