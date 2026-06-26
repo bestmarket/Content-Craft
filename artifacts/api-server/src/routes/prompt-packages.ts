@@ -3750,7 +3750,9 @@ router.post("/prompt-packages/:id/publish", requireAuth, async (req: any, res) =
 
     let bundle: PromptBundle;
     try {
-      bundle = JSON.parse(product.description ?? "{}") as PromptBundle;
+      const parsed = JSON.parse(product.description ?? "{}");
+      // studioBundle stores the actual PromptBundle one level deeper under `bundle`
+      bundle = (parsed.bundle ?? parsed) as PromptBundle;
     } catch {
       res.status(400).json({ error: "Invalid bundle data" }); return;
     }
@@ -3977,9 +3979,12 @@ router.get("/prompt-packages/:id/download", requireAuth, async (req: any, res) =
 
     if (!product) { res.status(404).json({ error: "Not found" }); return; }
 
-    const bundle = JSON.parse(product.description ?? "{}") as PromptBundle;
+    const _parsed = JSON.parse(product.description ?? "{}");
+    // studioBundle stores the actual PromptBundle one level deeper under `bundle`
+    const bundle = (_parsed.bundle ?? _parsed) as PromptBundle;
     const html = generatePDFHTML(bundle);
-    const filename = bundle.packageTitle.replace(/[^a-z0-9\s]/gi, "").replace(/\s+/g, "-").slice(0, 60);
+    const title = bundle.packageTitle ?? "prompt-pack";
+    const filename = title.replace(/[^a-z0-9\s]/gi, "").replace(/\s+/g, "-").slice(0, 60);
 
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.setHeader("Content-Disposition", `attachment; filename="${filename}.html"`);

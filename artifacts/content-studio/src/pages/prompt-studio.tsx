@@ -1193,9 +1193,20 @@ function ResultsView({ result, form, onReset }: { result: any; form: StudioForm;
     finally { setPublishingTarget(null); }
   };
 
-  const handlePreview = () => {
-    const token = localStorage.getItem("token");
-    window.open(`/api/prompt-packages/${result.id}/preview?token=${token}`, "_blank");
+  const handlePreview = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const r = await fetch(`/api/prompt-packages/${result.id}/preview`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!r.ok) { alert("Preview unavailable — please try again."); return; }
+      const blob = await r.blob();
+      const url = URL.createObjectURL(blob);
+      const w = window.open(url, "_blank");
+      // Revoke after a delay to allow the browser to load it
+      setTimeout(() => URL.revokeObjectURL(url), 30000);
+      if (!w) alert("Pop-up blocked — please allow pop-ups for this site.");
+    } catch { alert("Preview failed. Please try again."); }
   };
 
   const qualityScore    = bundle?.qualityScore    ?? 0;
