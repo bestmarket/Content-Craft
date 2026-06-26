@@ -21,18 +21,22 @@ function computeStreak(user: { currentStreak?: number | null; longestStreak?: nu
 }
 
 const router = Router();
-if (!process.env.SESSION_SECRET) {
-  throw new Error("SESSION_SECRET environment variable is required but not set. Set it in your environment/secrets.");
+
+function getJwtSecret(): string {
+  const secret = process.env.SESSION_SECRET;
+  if (!secret) {
+    throw new Error("SESSION_SECRET environment variable is required but not set. Set it in your environment/secrets.");
+  }
+  return secret;
 }
-const JWT_SECRET = process.env.SESSION_SECRET as string;
 
 export function signToken(userId: number, role: string) {
-  return jwt.sign({ userId, role }, JWT_SECRET, { expiresIn: "90d" });
+  return jwt.sign({ userId, role }, getJwtSecret(), { expiresIn: "90d" });
 }
 
 export function verifyToken(token: string): { userId: number; role: string } | null {
   try {
-    return jwt.verify(token, JWT_SECRET) as { userId: number; role: string };
+    return jwt.verify(token, getJwtSecret()) as { userId: number; role: string };
   } catch {
     return null;
   }
