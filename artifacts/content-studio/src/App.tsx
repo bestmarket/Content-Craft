@@ -1,5 +1,28 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, Component, type ErrorInfo, type ReactNode } from "react";
 import { Switch, Route, Router as WouterRouter, Redirect } from "wouter";
+
+class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { error: null };
+  }
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error("ErrorBoundary caught:", error, info);
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{ padding: 32, fontFamily: "monospace", whiteSpace: "pre-wrap", background: "#1e1e2e", color: "#f38ba8", minHeight: "100vh" }}>
+          {"SELOVOX REACT ERROR\n\n" + this.state.error.message + "\n\n" + (this.state.error.stack || "")}
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Toaster } from "@/components/ui/toaster";
@@ -321,9 +344,11 @@ function AppInner() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AppInner />
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <AppInner />
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 

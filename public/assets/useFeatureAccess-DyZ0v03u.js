@@ -1,1 +1,0 @@
-import{u as a}from"./vendor-query-aVKVmZtb.js";import{a as r}from"./index-DACAQscw.js";function u(){return a({queryKey:["my-feature-access"],queryFn:()=>r.get("/features/my-access").then(e=>e.data),staleTime:300*1e3})}export{u};

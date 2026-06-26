@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/assets/index-DACAQscw.js"></script>
+    <script type="module" crossorigin src="/assets/index-BYe8GaNu.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/vendor-query-aVKVmZtb.js">
     <link rel="modulepreload" crossorigin href="/assets/vendor-radix-CIHbzh1Q.js">
     <link rel="modulepreload" crossorigin href="/assets/vendor-pdf-CeQKYnpY.js">
@@ -26,5 +26,19 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      window.__errorCaught = false;
+      function showError(msg, src, line, col, err) {
+        if (window.__errorCaught) return;
+        window.__errorCaught = true;
+        var r = document.getElementById('root');
+        if (r) {
+          r.style.cssText = 'padding:32px;font-family:monospace;white-space:pre-wrap;background:#1e1e2e;color:#f38ba8;min-height:100vh;';
+          r.textContent = 'SELOVOX RUNTIME ERROR\n\n' + msg + '\n\nSource: ' + (src||'') + ':' + (line||'') + ':' + (col||'') + '\n\n' + (err && err.stack ? err.stack : '');
+        }
+      }
+      window.onerror = function(msg, src, line, col, err) { showError(msg, src, line, col, err); return false; };
+      window.addEventListener('unhandledrejection', function(e) { showError('Unhandled Promise: ' + (e.reason && e.reason.message || e.reason), '', '', '', e.reason); });
+    </script>
   </body>
 </html>
