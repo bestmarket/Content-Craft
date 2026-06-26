@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "pnpm install && pnpm --filter @workspace/api-server run build:vercel && pnpm --filter @workspace/content-studio run build",
+  "buildCommand": "pnpm install --frozen-lockfile && pnpm --filter @workspace/api-server run build:vercel && REPL_ID= REPL_SLUG= REPLIT_DEV_DOMAIN= NODE_ENV=production pnpm --filter @workspace/content-studio run build",
   "outputDirectory": "public",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/handler.mjs" },
