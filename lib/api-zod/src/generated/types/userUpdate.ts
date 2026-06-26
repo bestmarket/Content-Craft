@@ -11,6 +11,4 @@ export interface UserUpdate {
   name?: string;
   isActive?: boolean;
   role?: UserUpdateRole;
-  subscriptionTier?: 'free' | 'pro';
-  subscriptionExpiresAt?: string | null;
 }

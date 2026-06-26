@@ -46,9 +46,6 @@ export interface User {
   name: string;
   role: UserRole;
   isActive: boolean;
-  subscriptionTier: 'free' | 'pro';
-  /** @nullable */
-  subscriptionExpiresAt?: string | null;
   createdAt: string;
   /** @nullable */
   lastLogin?: string | null;
@@ -78,9 +75,6 @@ export interface UserUpdate {
   name?: string;
   isActive?: boolean;
   role?: UserUpdateRole;
-  subscriptionTier?: 'free' | 'pro';
-  /** @nullable */
-  subscriptionExpiresAt?: string | null;
 }
 
 export type PromptType = typeof PromptType[keyof typeof PromptType];
