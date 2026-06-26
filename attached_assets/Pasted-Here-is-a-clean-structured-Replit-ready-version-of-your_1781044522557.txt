@@ -1,0 +1,371 @@
+Here is a clean, structured, Replit-ready version of your prompt. I rewrote it so the AI can actually follow it, build properly, and avoid confusion or messy output.
+
+
+---
+
+✅ REFINED REPLIT BUILD PROMPT (COPY & USE)
+
+You are to upgrade and extend this application into a high-performance AI content generation platform with an admin-controlled prompt system.
+
+
+---
+
+🔧 CORE OBJECTIVE
+
+Build a system where the admin can manage a Prompt Library, and users can generate high-quality content assets including:
+
+Social media posts (Facebook, TikTok, Twitter/X, YouTube)
+
+Video scripts
+
+Thumbnails
+
+PDFs (premium formatted digital products)
+
+Landing pages for PDF products
+
+Marketing copy and sales pages
+
+
+All outputs must feel human-written, emotionally engaging, viral-ready, and high-conversion oriented.
+
+
+---
+
+🧠 PROMPT LIBRARY SYSTEM (ADMIN PANEL)
+
+Create an admin panel where prompts are stored as modular templates.
+
+Each prompt must include:
+
+Name (e.g. “TikTok Viral Script Generator”)
+
+Category (Facebook / TikTok / YouTube / Twitter / PDF / Thumbnail / Landing Page)
+
+Output format rules
+
+Tone controls
+
+Viral optimization instructions
+
+
+
+---
+
+✍️ CONTENT GENERATION PROMPTS (REQUIRED MODULES)
+
+1. SOCIAL MEDIA CONTENT PROMPTS
+
+Create separate prompts for:
+
+Facebook Post Generator
+
+TikTok Script Generator
+
+YouTube Script Generator
+
+Twitter/X Post Generator
+
+
+RULES FOR ALL SOCIAL CONTENT:
+
+Must be short, engaging, and emotionally human
+
+Must include conversational hooks like:
+
+“Wait… do you know this?”
+
+“Before you scroll…”
+
+“This is how it really works…”
+
+
+Must avoid robotic AI tone completely
+
+Must feel like real human storytelling
+
+
+STYLE OPTIONS:
+
+Each prompt must support:
+
+Comedic
+
+Humorous
+
+Friendly
+
+Conversational
+
+Emotional storytelling
+
+Motivational
+
+
+OUTPUT ADDITIONS:
+
+Each generated content must include:
+
+Viral title with score (e.g. 98.5/100)
+
+Hashtags (platform optimized)
+
+Trending keywords/tags
+
+Hook + body + CTA structure
+
+
+
+---
+
+🎬 THUMBNAIL GENERATOR PROMPT
+
+Create a thumbnail prompt system that:
+
+Generates high-impact YouTube/TikTok thumbnails
+
+Includes:
+
+Bold, readable text
+
+Emotional facial expressions or strong visuals
+
+Central focus object
+
+High contrast colors
+
+
+Must adapt to niche automatically (finance, health, AI, motivation, etc.)
+
+Must follow “click psychology” principles
+
+
+
+---
+
+📄 PDF GENERATOR (DIGITAL PRODUCT SYSTEM)
+
+Create a PDF generator that produces:
+
+Premium eBooks / guides / digital products
+
+Structured with:
+
+Cover page
+
+Table of contents (Menu)
+
+Chapters with emojis and headings
+
+About section
+
+Conclusion + CTA
+
+
+Must feel like a sellable digital product
+
+
+IMPORTANT PDF FEATURES:
+
+User can choose number of pages
+
+PDF must match niche automatically
+
+Include graphics placeholders per section
+
+Must generate cover page design prompt inside PDF system
+
+Must be exportable as downloadable PDF
+
+Must allow editing before final download
+
+
+
+---
+
+🌐 LANDING PAGE GENERATOR (FOR PDF PRODUCTS)
+
+For every generated PDF, also generate a:
+
+High-conversion sales landing page
+
+Structure:
+
+Hero headline (viral hook)
+
+Problem → solution
+
+Benefits section
+
+Social proof (reviews with images placeholders)
+
+Pricing section
+
+CTA buttons
+
+
+
+LANDING PAGE FEATURES:
+
+Animated text or dynamic visual hooks
+
+High trust design
+
+Conversion-focused copywriting
+
+Mobile responsive design
+
+
+
+---
+
+💳 MONETIZATION SYSTEM
+
+Create subscription system:
+
+Plan: $29/month
+
+Includes unlimited generation (based on admin settings)
+
+2-day free trial for new users
+
+
+ADMIN CONTROL:
+
+Enable/disable features per plan
+
+
+PAYMENT INTEGRATION:
+
+Add support for:
+
+Paystack
+
+LemonSqueezy
+
+
+Admin can toggle payment providers on/off
+
+
+
+---
+
+🔐 SECURITY SYSTEM
+
+Add:
+
+Google Authentication login
+
+IP blocking for abuse prevention
+
+Email + phone rate limiting
+
+Block temporary/disposable emails
+
+Prevent multiple free trial abuse
+
+
+
+---
+
+🚀 VIRAL ENGINE RULES (VERY IMPORTANT)
+
+All generated outputs must include:
+
+High emotional triggers
+
+Strong curiosity gaps
+
+Viral hooks
+
+Engagement psychology
+
+Human storytelling flow
+
+
+DO NOT use robotic AI tone.
+
+
+---
+
+🎥 BONUS FEATURES
+
+Add advanced modules:
+
+1. VIDEO IDEA GENERATOR
+
+Viral video concepts
+
+Short-form + long-form ideas
+
+
+2. MOVIE SCRIPT GENERATOR
+
+Cinematic storytelling prompts
+
+Emotional + suspense-driven structure
+
+
+3. MULTIMILLION-STYLE SCRIPT MODE
+
+High-end storytelling like top creators
+
+Strong hooks + dramatic flow
+
+
+
+---
+
+📱 UI / UX REQUIREMENTS
+
+Fully mobile responsive
+
+Modern SaaS dashboard design
+
+Attractive homepage with motion effects
+
+High-retention UI design (scroll-stopping visuals)
+
+Clean admin + user separation
+
+
+
+---
+
+🧪 FINAL REQUIREMENT
+
+Ensure:
+
+All modules are connected properly
+
+No broken flows
+
+System is production-ready
+
+Outputs are high quality, human-like, and viral optimized
+
+Everything works smoothly without errors
+
+
+
+---
+
+⚠️ IMPORTANT RULE
+
+Avoid generic AI writing.
+
+Every output must feel like it was written by a top-tier viral content creator or marketer, not an AI tool.
+
+
+---
+
+If you want, I can also:
+
+Turn this into a Replit AI agent prompt (even more optimized)
+
+Or design your database schema + API structure
+
+Or map the full SaaS architecture for you
+
+
+Just tell me.

@@ -1,0 +1,1209 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: ViralCraft Studio API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: auth
+    description: Authentication
+  - name: users
+    description: User management
+  - name: prompts
+    description: Prompt library
+  - name: content
+    description: Content generation
+  - name: thumbnails
+    description: Thumbnail generation
+  - name: pdfs
+    description: PDF generation
+  - name: video-model
+    description: Video modeling
+  - name: api-keys
+    description: API key management
+  - name: payment-gateways
+    description: Payment gateway management
+  - name: features
+    description: Feature flags
+  - name: settings
+    description: App settings
+  - name: chat
+    description: Support chat
+  - name: dashboard
+    description: Dashboard stats
+
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  # AUTH
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Bad request
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Unauthorized
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: Logout
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /auth/me:
+    get:
+      operationId: getMe
+      tags: [auth]
+      summary: Get current user
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Unauthorized
+
+  /auth/change-password:
+    post:
+      operationId: changePassword
+      tags: [auth]
+      summary: Change current user's password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangePasswordInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+
+  # USERS (admin)
+  /users:
+    get:
+      operationId: listUsers
+      tags: [users]
+      summary: List all users
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: search
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserList"
+
+  /users/{id}:
+    get:
+      operationId: getUser
+      tags: [users]
+      summary: Get user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    patch:
+      operationId: updateUser
+      tags: [users]
+      summary: Update user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    delete:
+      operationId: deleteUser
+      tags: [users]
+      summary: Delete user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  # PROMPTS
+  /prompts:
+    get:
+      operationId: listPrompts
+      tags: [prompts]
+      summary: List all prompts
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [content, thumbnail, pdf, chatbot]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Prompt"
+    post:
+      operationId: createPrompt
+      tags: [prompts]
+      summary: Create a prompt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PromptInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prompt"
+
+  /prompts/{id}:
+    patch:
+      operationId: updatePrompt
+      tags: [prompts]
+      summary: Update a prompt
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PromptUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prompt"
+    delete:
+      operationId: deletePrompt
+      tags: [prompts]
+      summary: Delete a prompt
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  # CONTENT GENERATION
+  /content/generate:
+    post:
+      operationId: generateContent
+      tags: [content]
+      summary: Generate content for a platform
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContentGenerateInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentResult"
+
+  /content/history:
+    get:
+      operationId: listContentHistory
+      tags: [content]
+      summary: List content generation history
+      parameters:
+        - name: platform
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentHistoryList"
+
+  /content/history/{id}:
+    get:
+      operationId: getContentHistory
+      tags: [content]
+      summary: Get single content history item
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentHistory"
+    delete:
+      operationId: deleteContentHistory
+      tags: [content]
+      summary: Delete content history item
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  # THUMBNAILS
+  /thumbnails/generate:
+    post:
+      operationId: generateThumbnail
+      tags: [thumbnails]
+      summary: Generate thumbnail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ThumbnailGenerateInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThumbnailResult"
+
+  # VIDEO MODELING
+  /video-model/analyze:
+    post:
+      operationId: analyzeVideos
+      tags: [video-model]
+      summary: Analyze video links and generate modeled script
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VideoModelInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentResult"
+
+  # PDF GENERATION
+  /pdfs/generate:
+    post:
+      operationId: generatePdf
+      tags: [pdfs]
+      summary: Generate a premium PDF
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PdfGenerateInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PdfResult"
+
+  /pdfs/history:
+    get:
+      operationId: listPdfHistory
+      tags: [pdfs]
+      summary: List PDF generation history
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PdfHistory"
+
+  # API KEYS (admin)
+  /api-keys:
+    get:
+      operationId: listApiKeys
+      tags: [api-keys]
+      summary: List all stored API keys (masked)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApiKey"
+    post:
+      operationId: upsertApiKey
+      tags: [api-keys]
+      summary: Add or update an API key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiKeyInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKey"
+
+  /api-keys/{id}:
+    delete:
+      operationId: deleteApiKey
+      tags: [api-keys]
+      summary: Delete an API key
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  # PAYMENT GATEWAYS (admin)
+  /payment-gateways:
+    get:
+      operationId: listPaymentGateways
+      tags: [payment-gateways]
+      summary: List payment gateway configs
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PaymentGateway"
+    post:
+      operationId: upsertPaymentGateway
+      tags: [payment-gateways]
+      summary: Add or update a payment gateway
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentGatewayInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentGateway"
+
+  /payment-gateways/{id}/toggle:
+    patch:
+      operationId: togglePaymentGateway
+      tags: [payment-gateways]
+      summary: Activate or deactivate a payment gateway
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToggleInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentGateway"
+
+  # FEATURE FLAGS (admin)
+  /features:
+    get:
+      operationId: listFeatures
+      tags: [features]
+      summary: List all feature flags
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Feature"
+
+  /features/{id}/toggle:
+    patch:
+      operationId: toggleFeature
+      tags: [features]
+      summary: Toggle a feature on or off
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToggleInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Feature"
+
+  # SETTINGS (admin)
+  /settings:
+    get:
+      operationId: listSettings
+      tags: [settings]
+      summary: Get all app settings
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Setting"
+    patch:
+      operationId: updateSetting
+      tags: [settings]
+      summary: Update one or more settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SettingUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Setting"
+
+  # SUPPORT CHAT
+  /chat/conversations:
+    get:
+      operationId: listConversations
+      tags: [chat]
+      summary: List conversations (admin sees all, user sees own)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Conversation"
+    post:
+      operationId: createConversation
+      tags: [chat]
+      summary: Start a new support conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Conversation"
+
+  /chat/conversations/{id}/messages:
+    get:
+      operationId: listMessages
+      tags: [chat]
+      summary: Get messages for a conversation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChatMessage"
+    post:
+      operationId: sendMessage
+      tags: [chat]
+      summary: Send a message in a conversation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatMessageInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatMessage"
+
+  /chat/bot:
+    post:
+      operationId: askChatbot
+      tags: [chat]
+      summary: Ask the AI chatbot a question
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatbotInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatbotResponse"
+
+  # DASHBOARD STATS
+  /dashboard/stats:
+    get:
+      operationId: getDashboardStats
+      tags: [dashboard]
+      summary: Get dashboard stats for current user
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardStats"
+
+  /dashboard/admin-stats:
+    get:
+      operationId: getAdminStats
+      tags: [dashboard]
+      summary: Get admin dashboard stats
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminStats"
+
+  /dashboard/recent-content:
+    get:
+      operationId: getRecentContent
+      tags: [dashboard]
+      summary: Get recent content for dashboard
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ContentHistory"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    ChangePasswordInput:
+      type: object
+      required: [currentPassword, newPassword]
+      properties:
+        currentPassword: { type: string, minLength: 1 }
+        newPassword: { type: string, minLength: 6 }
+
+    MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+
+    # AUTH
+    RegisterInput:
+      type: object
+      required: [email, password, name]
+      properties:
+        email: { type: string }
+        password: { type: string, minLength: 6 }
+        name: { type: string }
+
+    LoginInput:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string }
+        password: { type: string }
+
+    AuthResponse:
+      type: object
+      required: [user, token]
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        token:
+          type: string
+
+    # USER
+    User:
+      type: object
+      required: [id, email, name, role, isActive, createdAt]
+      properties:
+        id: { type: integer }
+        email: { type: string }
+        name: { type: string }
+        role: { type: string, enum: [admin, user] }
+        isActive: { type: boolean }
+        createdAt: { type: string }
+        lastLogin: { type: ["string", "null"] }
+        contentCount: { type: ["integer", "null"] }
+
+    UserList:
+      type: object
+      required: [users, total]
+      properties:
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"
+        total: { type: integer }
+
+    UserUpdate:
+      type: object
+      properties:
+        name: { type: string }
+        isActive: { type: boolean }
+        role: { type: string, enum: [admin, user] }
+
+    # PROMPT
+    Prompt:
+      type: object
+      required: [id, name, type, systemPrompt, isActive, createdAt]
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        type: { type: string, enum: [content, thumbnail, pdf, chatbot] }
+        systemPrompt: { type: string }
+        description: { type: ["string", "null"] }
+        isActive: { type: boolean }
+        createdAt: { type: string }
+
+    PromptInput:
+      type: object
+      required: [name, type, systemPrompt]
+      properties:
+        name: { type: string }
+        type: { type: string, enum: [content, thumbnail, pdf, chatbot] }
+        systemPrompt: { type: string }
+        description: { type: string }
+        isActive: { type: boolean }
+
+    PromptUpdate:
+      type: object
+      properties:
+        name: { type: string }
+        systemPrompt: { type: string }
+        description: { type: string }
+        isActive: { type: boolean }
+
+    # CONTENT
+    ContentGenerateInput:
+      type: object
+      required: [platform, topic, wordCount]
+      properties:
+        platform:
+          type: string
+          enum: [youtube, tiktok, instagram, facebook, twitter]
+        topic: { type: string }
+        wordCount: { type: integer }
+        stylePromptId: { type: ["integer", "null"] }
+        outputMode: { type: string, enum: [plain, digest] }
+        generateThumbnail: { type: boolean }
+
+    ViralTitle:
+      type: object
+      required: [title, viralityScore]
+      properties:
+        title: { type: string }
+        viralityScore: { type: integer }
+
+    ContentResult:
+      type: object
+      required: [titles, script, description, tags, hashtags]
+      properties:
+        titles:
+          type: array
+          items:
+            $ref: "#/components/schemas/ViralTitle"
+        script: { type: string }
+        description: { type: string }
+        tags:
+          type: array
+          items: { type: string }
+        hashtags:
+          type: array
+          items: { type: string }
+        thumbnailUrl: { type: ["string", "null"] }
+        wordCount: { type: integer }
+        estimatedMinutes: { type: ["integer", "null"] }
+        id: { type: ["integer", "null"] }
+
+    ContentHistory:
+      type: object
+      required: [id, platform, topic, createdAt]
+      properties:
+        id: { type: integer }
+        platform: { type: string }
+        topic: { type: string }
+        wordCount: { type: ["integer", "null"] }
+        titles:
+          type: array
+          items:
+            $ref: "#/components/schemas/ViralTitle"
+        script: { type: ["string", "null"] }
+        description: { type: ["string", "null"] }
+        tags:
+          type: array
+          items: { type: string }
+        hashtags:
+          type: array
+          items: { type: string }
+        thumbnailUrl: { type: ["string", "null"] }
+        createdAt: { type: string }
+
+    ContentHistoryList:
+      type: object
+      required: [items, total]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ContentHistory"
+        total: { type: integer }
+
+    # THUMBNAIL
+    ThumbnailGenerateInput:
+      type: object
+      required: [topic, platform]
+      properties:
+        topic: { type: string }
+        platform: { type: string, enum: [youtube, tiktok] }
+        promptId: { type: ["integer", "null"] }
+        contentId: { type: ["integer", "null"] }
+
+    ThumbnailResult:
+      type: object
+      required: [imageUrl]
+      properties:
+        imageUrl: { type: string }
+        prompt: { type: ["string", "null"] }
+
+    # VIDEO MODEL
+    VideoModelInput:
+      type: object
+      required: [videoUrls, platform, topic]
+      properties:
+        videoUrls:
+          type: array
+          items: { type: string }
+          maxItems: 5
+        platform: { type: string, enum: [youtube, tiktok] }
+        topic: { type: string }
+        wordCount: { type: integer }
+        stylePromptId: { type: ["integer", "null"] }
+
+    # PDF
+    PdfGenerateInput:
+      type: object
+      required: [topic, authorName]
+      properties:
+        topic: { type: string }
+        authorName: { type: string }
+        description: { type: ["string", "null"] }
+        promptId: { type: ["integer", "null"] }
+
+    PdfResult:
+      type: object
+      required: [title, content]
+      properties:
+        id: { type: ["integer", "null"] }
+        title: { type: string }
+        content: { type: string }
+        tableOfContents:
+          type: array
+          items: { type: string }
+        aboutSection: { type: ["string", "null"] }
+        authorBio: { type: ["string", "null"] }
+
+    PdfHistory:
+      type: object
+      required: [id, topic, authorName, createdAt]
+      properties:
+        id: { type: integer }
+        topic: { type: string }
+        authorName: { type: string }
+        title: { type: ["string", "null"] }
+        createdAt: { type: string }
+
+    # API KEYS
+    ApiKey:
+      type: object
+      required: [id, provider, maskedKey, isActive]
+      properties:
+        id: { type: integer }
+        provider: { type: string }
+        maskedKey: { type: string }
+        isActive: { type: boolean }
+        purpose: { type: ["string", "null"] }
+
+    ApiKeyInput:
+      type: object
+      required: [provider, key]
+      properties:
+        provider: { type: string }
+        key: { type: string }
+        purpose: { type: string }
+        isActive: { type: boolean }
+
+    # PAYMENT GATEWAYS
+    PaymentGateway:
+      type: object
+      required: [id, name, isActive]
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        isActive: { type: boolean }
+        config: { type: ["string", "null"] }
+        updatedAt: { type: string }
+
+    PaymentGatewayInput:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        config: { type: string }
+        isActive: { type: boolean }
+
+    ToggleInput:
+      type: object
+      required: [isActive]
+      properties:
+        isActive: { type: boolean }
+
+    # FEATURES
+    Feature:
+      type: object
+      required: [id, key, label, isActive]
+      properties:
+        id: { type: integer }
+        key: { type: string }
+        label: { type: string }
+        description: { type: ["string", "null"] }
+        isActive: { type: boolean }
+
+    # SETTINGS
+    Setting:
+      type: object
+      required: [key, value]
+      properties:
+        key: { type: string }
+        value: { type: string }
+        label: { type: ["string", "null"] }
+
+    SettingUpdate:
+      type: object
+      required: [updates]
+      properties:
+        updates:
+          type: array
+          items:
+            type: object
+            required: [key, value]
+            properties:
+              key: { type: string }
+              value: { type: string }
+
+    # CHAT
+    Conversation:
+      type: object
+      required: [id, userId, status, createdAt]
+      properties:
+        id: { type: integer }
+        userId: { type: integer }
+        userName: { type: ["string", "null"] }
+        status: { type: string, enum: [open, closed] }
+        lastMessage: { type: ["string", "null"] }
+        unreadCount: { type: integer }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+
+    ConversationInput:
+      type: object
+      required: [initialMessage]
+      properties:
+        initialMessage: { type: string }
+
+    ChatMessage:
+      type: object
+      required: [id, conversationId, senderRole, content, createdAt]
+      properties:
+        id: { type: integer }
+        conversationId: { type: integer }
+        senderRole: { type: string, enum: [user, admin] }
+        content: { type: string }
+        isRead: { type: boolean }
+        createdAt: { type: string }
+
+    ChatMessageInput:
+      type: object
+      required: [content]
+      properties:
+        content: { type: string }
+
+    ChatbotInput:
+      type: object
+      required: [message]
+      properties:
+        message: { type: string }
+        sessionId: { type: ["string", "null"] }
+
+    ChatbotResponse:
+      type: object
+      required: [reply]
+      properties:
+        reply: { type: string }
+        sessionId: { type: string }
+
+    # DASHBOARD
+    DashboardStats:
+      type: object
+      required: [totalContent, thisWeek, byPlatform, recentPdfs]
+      properties:
+        totalContent: { type: integer }
+        thisWeek: { type: integer }
+        byPlatform:
+          type: array
+          items:
+            type: object
+            required: [platform, count]
+            properties:
+              platform: { type: string }
+              count: { type: integer }
+        recentPdfs: { type: integer }
+        totalThumbnails: { type: integer }
+
+    AdminStats:
+      type: object
+      required: [totalUsers, activeUsers, totalContent, totalConversations]
+      properties:
+        totalUsers: { type: integer }
+        activeUsers: { type: integer }
+        totalContent: { type: integer }
+        totalConversations: { type: integer }
+        openConversations: { type: integer }
+        contentThisWeek: { type: integer }
+        newUsersThisWeek: { type: integer }

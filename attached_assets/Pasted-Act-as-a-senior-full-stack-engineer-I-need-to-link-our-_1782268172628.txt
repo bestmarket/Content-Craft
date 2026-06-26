@@ -1,0 +1,27 @@
+Act as a senior full-stack engineer. I need to link our Next.js (App Router) system to Cloudflare R2 for zero-cost object storage of user-uploaded author images,vodeos,audios generated book covers, compiled PDFs, and media assets. We are deploying on Vercel and using Neon PostgreSQL for our database. 
+
+Please build the entire file management system using the @aws-sdk/client-s3 package (since Cloudflare R2 uses the standard S3-compatible API). Implement the following components:
+
+1. Environment Variable Requirements:
+   Configure the system to read the following variables from process.env:
+   - CLOUDFLARE_R2_ACCOUNT_ID
+   - CLOUDFLARE_R2_ACCESS_KEY_ID
+   - CLOUDFLARE_R2_SECRET_ACCESS_KEY
+   - CLOUDFLARE_R2_BUCKET_NAME
+   - CLOUDFLARE_R2_PUBLIC_DOMAIN (The public CDN URL to access uploaded files)
+
+2. Backend Storage Service (lib/r2Storage.js):
+   - Create an initialized S3Client configured specifically for Cloudflare R2 endpoint routing: `https://${ACCOUNT_ID}.r2.cloudflarestorage.com`.
+   - Write a helper function `uploadFileToR2(fileBuffer, fileName, mimeType)` that uploads files directly to our R2 bucket.
+   - Write a helper function `getPublicUrl(fileName)` that returns the final public CDN delivery URL for that asset.
+
+3. Next.js API Routes for Non-Blocking Uploads:
+   - Create an API route at `/api/products/upload-author-image` that accepts an image from the frontend, uploads it safely to Cloudflare R2 via our storage service, and returns the public CDN image URL to the client.
+
+4. Database Integration Layer:
+   - Ensure that when a file is successfully uploaded to R2, the system updates the corresponding fields in our Neon PostgreSQL database (e.g., updating the `authorImageUrl`, `pdfUrl`, or `coverImageUrl` fields in the Product table) instead of storing raw files in Neon.
+
+5. Secure Streaming Architecture:
+   - Ensure the upload handlers process data as a stream or small buffers to fit cleanly within Vercel's serverless function memory limitations without leaking resources or throwing execution errors.
+
+Build this systematically, generate any missing dependencies, and confirm once all scripts are written.

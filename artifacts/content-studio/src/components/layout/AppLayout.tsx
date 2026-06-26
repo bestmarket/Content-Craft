@@ -9,7 +9,6 @@ import {
   TrendingUp, ShoppingBag, DollarSign, Sparkles, Package, Gift, Bot,
   Mic, AudioWaveform, Clapperboard, Rocket, Code2, Store,
   PackagePlus, Layers, Wand2, BarChart2, Pin, Star, Coins, BookOpen,
-  GraduationCap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+kokoro-v1.0.onnx
+voices-v1.0.bin
+video_output/
+=2.0

@@ -1,0 +1,9 @@
+{
+  "buildCommand": "pnpm -w run typecheck:libs && pnpm --filter @workspace/content-studio run build",
+  "outputDirectory": "artifacts/content-studio/dist/public",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

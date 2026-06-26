@@ -1,0 +1,314 @@
+Here is your clean COPY-PASTE prompt for Replit (structured, clear, no confusion, includes everything you asked):
+
+
+---
+
+🚀 REPLIT UPDATE PROMPT (PROMO SALES SYSTEM + LEGAL PAGES + EDITABLE LANDING PAGES)
+
+Create a new separate marketing website page system inside the application.
+
+This system will be used as a high-converting promotional sales engine for the AI platform.
+
+
+---
+
+🌐 1. CREATE A SEPARATE PROMO SALES PAGE
+
+Create a new page route:
+
+> /promo or /sales
+
+
+
+This page must contain a high-end, guru-style, high-conversion sales landing page written like a multimillion-dollar SaaS offer.
+
+Use premium modern design:
+
+Clean SaaS layout
+
+High contrast sections
+
+Animated hero section
+
+Gradient buttons
+
+Mobile responsive design
+
+Scroll-triggered effects
+
+Trust badges and testimonials
+
+
+
+---
+
+🚀 SALES PAGE COPY (USE EXACT CONTENT STRUCTURE BELOW)
+
+HERO SECTION
+
+Turn Any Idea Into a Sellable Digital Product… And Start Making Money Online in Minutes
+
+Create high-quality PDF products, publish them to your own store, and promote them with viral content automatically — all in one system.
+
+No writing skills. No design skills. No marketing experience needed.
+
+Just enter an idea. The system builds everything else.
+
+[ Start Free Trial ]
+No credit card required
+
+
+---
+
+SUBHEADLINE
+
+From idea → product → sales → marketing… all automated in one platform.
+
+
+---
+
+DEMO SECTION
+
+Watch how it works in under 60 seconds:
+
+Enter a simple idea
+
+AI builds a premium digital product (PDF)
+
+A ready-to-sell landing page is created
+
+Viral TikTok, YouTube, Twitter content is generated
+
+You get a shareable store link
+
+
+
+---
+
+PROBLEM SECTION
+
+Most people struggle to make money online because:
+
+They don’t know what to sell
+
+They can’t create professional digital products
+
+They don’t know how to market anything
+
+They waste months learning tools that don’t connect
+
+
+So they give up before they even start.
+
+
+---
+
+SOLUTION SECTION
+
+This platform does everything for you.
+
+It turns your idea into:
+
+A complete digital product (PDF)
+
+A high-converting sales page
+
+A personal online store
+
+Viral content for all platforms
+
+A ready-to-share money-making link
+
+
+All in minutes.
+
+
+---
+
+WHY THIS IS DIFFERENT
+
+Most tools stop at creation.
+
+This one goes further:
+
+It helps you create, sell, and promote automatically.
+
+You don’t just get content — you get a full monetization system.
+
+
+---
+
+PRICING SECTION
+
+Start Free. Upgrade When You’re Ready.
+
+Free Trial: 2 days
+
+Premium Plan: $29/month
+
+Includes:
+
+Unlimited digital products
+
+Unlimited landing pages
+
+Unlimited stores
+
+Unlimited viral content
+
+Unlimited campaigns
+
+
+
+---
+
+FINAL CTA
+
+Stop just consuming content… start creating income from it.
+
+Turn your ideas into digital products people actually buy.
+
+[ Start Free Trial ]
+
+
+---
+
+📄 2. ADD LEGAL PAGES SYSTEM
+
+Create editable pages in the system:
+
+/about
+
+/privacy-policy
+
+/terms (disclaimer)
+
+/refund-policy
+
+
+Each page must:
+
+Be editable from Admin Panel
+
+Support rich text editing
+
+Be stored in database
+
+Be displayed in footer links
+
+
+
+---
+
+🧠 3. ADMIN PAGE EDITING SYSTEM
+
+In Admin Panel, add:
+
+PAGE MANAGER
+
+Admin can:
+
+Edit promo page content
+
+Edit About page
+
+Edit Privacy Policy
+
+Edit Terms/Disclaimer
+
+Edit Refund Policy
+
+Save and publish changes instantly
+
+
+
+---
+
+🏪 4. USER LANDING PAGE EDITING SYSTEM
+
+Users must be able to:
+
+Edit their generated landing pages
+
+Modify text sections
+
+Update pricing section
+
+Change headlines
+
+Save changes
+
+
+Each landing page must be:
+
+Stored per user
+
+Editable after generation
+
+Re-publishable with updated content
+
+
+
+---
+
+🔗 5. FOOTER SYSTEM
+
+Add footer links:
+
+About Us
+
+Privacy Policy
+
+Terms / Disclaimer
+
+Refund Policy
+
+Contact
+
+
+All must link to editable pages.
+
+
+---
+
+⚙️ 6. SYSTEM REQUIREMENTS
+
+Fully responsive UI
+
+Clean SaaS design
+
+Database-backed page storage
+
+Admin-controlled CMS system
+
+No broken routes
+
+Fast loading pages
+
+
+
+---
+
+🚀 FINAL RULE
+
+This system is NOT just a landing page.
+
+It is a complete marketing + sales + legal CMS system inside the SaaS platform, where:
+
+Admin controls global pages
+
+Users control their own landing pages
+
+Promo page is high-converting acquisition funnel
+
+
+
+---
+
+If you want next step, I can help you:
+
+Turn this promo page into a **viral TikTok funnel script**
+
+Or design your **full admin CMS database schema**
+
+Or optimize your **conversion rate (so this page actually sells hard)**

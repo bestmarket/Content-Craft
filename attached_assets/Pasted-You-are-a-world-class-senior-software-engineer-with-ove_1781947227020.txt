@@ -1,0 +1,178 @@
+You are a world-class senior software engineer with over 20 years of experience building production-grade systems and cloud platforms. You have deep expertise in full-stack development, software architecture, DevOps, AI systems, deployment infrastructure, and modern programming languages. Your engineering standards are extremely high, similar to the quality and capabilities of Replit.
+
+I want you to conduct deep research and design a professional AI-powered coding workspace inside my platform. The interface should be clean, modern, and inspired by Replit's simplicity and usability.
+
+Core Objective
+
+Create a complete AI coding environment where users can describe any software project in natural language, and the AI will generate, edit, complete, and preview the project in real time.
+
+Requirements
+
+1. Universal Project Generation
+
+Users should be able to create:
+
+- Web applications
+- Full-stack SaaS platforms
+- Mobile applications
+- APIs
+- Dashboards
+- Automation tools
+- Scripts
+- Any type of software project
+
+The AI should support multiple languages and frameworks, including:
+
+- JavaScript
+- TypeScript
+- Python
+- PHP
+- Java
+- C#
+- Go
+- Rust
+- Node.js
+- React
+- Next.js
+- Vue
+- Django
+- FastAPI
+- Laravel
+- And additional frameworks and languages
+
+The user should simply describe what they want, and the AI should build it.
+
+2. Replit-Style Workspace
+
+Create a professional coding workspace containing:
+
+- AI chat panel
+- File explorer
+- Code editor
+- Terminal
+- Logs panel
+- Live preview panel
+- Build status
+- Error diagnostics
+- Project settings
+- Environment variables manager
+- Package manager
+
+The interface should be simple and modern.
+
+3. Live Execution and Preview
+
+Implement a sandbox execution system (such as E2B or similar) so users can:
+
+- Run projects safely
+- Preview applications instantly
+- Test APIs and code
+- Debug errors
+- Continue iterating until the project is complete
+
+The AI should continue working until the entire project is finished.
+
+4. Marketplace Integration
+
+Users should be able to:
+
+- Publish completed projects to the marketplace
+- Edit listing details
+- Set prices
+- Add descriptions
+
+The system should automatically:
+
+- Generate screenshots
+- Scan the project and create preview images
+- Generate thumbnails
+- Produce feature highlights
+- Allow creators to preview listings before publishing
+
+Buyers should also be able to:
+
+- View screenshots
+- Preview projects
+- Inspect features
+- Decide before purchasing
+
+5. Purchase Options
+
+After purchase, buyers should have options to:
+
+1. Download the source code.
+
+2. Deploy directly to my platform when hosting is enabled.
+
+6. Hosting Toggle System
+
+Since I am not ready to provide hosting infrastructure immediately, create an administration system that allows:
+
+Global controls:
+
+- Enable hosting
+- Disable hosting
+
+Per-user controls:
+
+- Enable deployment for specific users
+- Disable deployment for specific users
+
+When hosting is disabled, buyers should only be able to download source code.
+
+When hosting is enabled, buyers should be able to:
+
+- Deploy with one click
+- Receive a project URL
+- Manage deployments
+
+7. Architecture
+
+Design the system professionally with:
+
+- Multi-tenant architecture
+- Scalable services
+- Secure sandbox execution
+- Storage layer
+- Marketplace service
+- Build workers
+- Queue system
+- AI orchestration layer
+- Project versioning
+- Monitoring and logging
+- Security isolation
+
+8. Reliability
+
+The system should:
+
+- Build projects accurately
+- Detect errors
+- Repair code automatically
+- Verify dependencies
+- Run tests when needed
+- Continue iterating until the project is functional
+
+The goal is to achieve a highly reliable AI development platform with capabilities approaching those of Replit.
+
+9. Deliverables
+
+Perform deep research and provide:
+
+1. Complete system architecture.
+2. Database schema.
+3. Backend services.
+4. Frontend UI structure.
+5. Workspace layout inspired by Replit.
+6. Sandbox execution strategy.
+7. Marketplace architecture.
+8. Deployment architecture.
+9. Hosting architecture.
+10. Admin panel design.
+11. Feature flag system for hosting.
+12. Security considerations.
+13. Recommended technologies.
+14. Development phases from MVP to advanced platform.
+15. Realistic limitations and solutions.
+
+Think deeply and engineer this professionally with scalability, reliability, and maintainability as top priorities. The goal is to create an AI application platform that can eventually approach the capabilities of Replit while integrating seamlessly with my marketplace ecosystem.

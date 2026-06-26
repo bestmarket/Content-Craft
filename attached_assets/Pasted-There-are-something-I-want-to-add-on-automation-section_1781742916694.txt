@@ -1,0 +1,55 @@
+There are something I want to add on automation section in the app. So I want to ask you, don't build this yet. I want to understand it very well. I want to have a feature on the app that will generate Replit templates. So I want to know if you can go deep into Replit and dig deep and populate those great apps that you have created, and build the templates inside the feature I want to put in my app. Then users can generate templates from my system, and they can sell it to customers, and the customers can bring it to you, Replit, to create an app, an entire app. Once they upload it, you will create the entire environment app, stack app, and give to them. Can this be possible? Don't create it yet. I just want to know if it's going to be possible.
+
+39 minutes ago
+
+Ok, can this be lucrative, can people it easily and how much ahould i be selling itt
+
+34 minutes ago
+
+How much should i be selling it
+
+32 minutes ago
+
+Ok, how do i market it, because users in my site will also generate templates sell in the market place
+
+30 minutes ago
+
+Ok, you know my app have other digital product generations, is this a problem, and what makes a greate template? Is it determins on the user or the template generator you are going to build? Can this crash my site with heavy genwrations
+
+18 minutes ago
+
+Is there any other product greater than this i can add to the automation? Think deep the current market
+
+13 minutes ago
+
+Here's what the current market is screaming for — ranked by opportunity size:
+
+🥇 AI Agent Templates — Biggest opportunity right now
+
+Pre-built AI agents for specific jobs: "Customer Support Agent", "Lead Gen Agent", "Social Media Manager Agent". Every business wants AI agents but can't build them. Your AI generates the agent config, prompts, and logic. Sell for $99–$299 each. This is the 2026 equivalent of selling website templates in 2010 — massive, early, and barely anyone doing it well yet.
+
+🥈 Automation Workflow Templates (n8n / Make.com)
+
+n8n and Make.com workflows are just JSON files. Your AI can generate them. A "Cold Email Automation" or "Lead Scraper + CRM Sync" workflow sells for $49–$199 on Gumroad right now. Businesses buy these daily. Low competition, high intent buyers.
+
+🥉 Chrome Extension Templates
+
+Pre-built, rebrandable Chrome extensions (productivity tools, AI writing assistants, price trackers). Buyers import into Replit or any editor, rebrand, and publish to the Chrome store. Sell for $49–$149. The "build your own Chrome extension" market is exploding.
+
+Also worth considering:
+
+Mobile App Templates (Expo/React Native) — "App in a box", $79–$199
+
+MCP Server Templates — Brand new tech, first-mover advantage, developers pay well
+
+Notion/Obsidian Dashboards — Simple to generate, $9–$49, high volume
+
+Email Sequence Packs — 30-day sequences for specific niches, $29–$79
+
+My honest ranking for YOUR platform specifically:
+
+ProductEffort to BuildRevenue PotentialMarket TimingAI Agent TemplatesMedium🔥🔥🔥🔥🔥Perfect nown8n WorkflowsLow🔥🔥🔥🔥NowChrome ExtensionsMedium🔥🔥🔥GrowingReplit TemplatesMedium🔥🔥🔥GrowingNotion TemplatesLow🔥🔥Saturating
+
+AI Agent Templates is the one I'd build first — it's higher ticket, your AI can generate them, and the market is hungry right now with almost no dedicated marketplaces serving it.
+
+Want to add any of these alongside the Replit templates feature?

@@ -1,0 +1,2 @@
+- [ViralCraft Seed DB approach](viralcraft-seed.md) — seed must use absolute pnpm store paths for pg/bcryptjs, not `require('pg')`
+- [ViralCraft type quirks](viralcraft-types.md) — ListPromptsType cast, GetRecentContent params position, PaymentGatewayInput.config is JSON string

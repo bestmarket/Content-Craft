@@ -1,0 +1,12 @@
+{
+  "provider": "node",
+  "install": {
+    "cmd": "npm install -g pnpm@9 && pnpm install --frozen-lockfile"
+  },
+  "build": {
+    "cmd": "pnpm --filter @workspace/content-studio run build && pnpm --filter @workspace/api-server run build"
+  },
+  "start": {
+    "cmd": "pnpm --filter @workspace/api-server run start"
+  }
+}

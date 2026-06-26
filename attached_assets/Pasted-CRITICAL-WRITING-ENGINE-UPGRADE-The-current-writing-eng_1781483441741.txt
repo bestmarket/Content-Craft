@@ -1,0 +1,181 @@
+CRITICAL WRITING ENGINE UPGRADE
+
+The current writing engine excessively repeats the user's original query.
+
+Example:
+
+If user enters:
+
+"Make money online using YouTube to sell digital products"
+
+The engine repeatedly inserts this exact phrase throughout the content.
+
+This creates:
+
+- Keyword stuffing
+- Robotic writing
+- Poor readability
+- Low-quality content
+- Unnatural flow
+
+This behavior must be removed.
+
+---
+
+TOPIC UNDERSTANDING SYSTEM
+
+When the user enters a topic:
+
+DO NOT treat the topic as a keyword.
+
+Instead:
+
+Extract:
+
+- Main subject
+- Audience
+- Desired outcome
+- Core concepts
+
+Example:
+
+Input:
+
+"Make money online using YouTube to sell digital products"
+
+Convert internally to:
+
+Subject:
+YouTube marketing
+
+Audience:
+Beginners
+
+Goal:
+Sell digital products
+
+Concepts:
+Traffic generation
+Audience building
+Content strategy
+Conversion optimization
+
+Write about these concepts naturally.
+
+Do not repeat the original query.
+
+---
+
+REPEAT DETECTION SYSTEM
+
+Before final output:
+
+Analyze:
+
+- Repeated phrases
+- Repeated sentences
+- Repeated keywords
+
+If any phrase appears excessively:
+
+Rewrite automatically.
+
+---
+
+HUMAN WRITING MODE
+
+Write as if an expert human author is explaining a topic.
+
+Do not continuously restate the article title.
+
+Humans introduce a topic once and then expand on related ideas.
+
+Follow that pattern.
+
+---
+
+SEMANTIC WRITING ENGINE
+
+Use related concepts instead of repeating keywords.
+
+Example:
+
+Instead of repeating:
+
+"Make money online using YouTube to sell digital products"
+
+Use natural variations:
+
+- YouTube marketing
+- Content-driven sales
+- Digital product promotion
+- Audience growth
+- Video-based marketing
+- Creator business
+- Online sales strategy
+
+Create variety.
+
+---
+
+CONTEXT MEMORY SYSTEM
+
+Track concepts already discussed.
+
+Do not repeat the same idea multiple times.
+
+Each new section must introduce new value.
+
+---
+
+ARTICLE QUALITY RULES
+
+Every section must:
+
+- Add new information
+- Expand understanding
+- Provide examples
+- Offer practical advice
+- Advance the discussion
+
+Never generate filler.
+
+Never restate previous paragraphs.
+
+---
+
+ANTI-AI DETECTION RULES
+
+Avoid:
+
+- "What if everything you've been told..."
+- "The shift that matters..."
+- "The part that changes everything..."
+- Generic motivational language
+- Empty philosophical statements
+
+Focus on useful information.
+
+Use concrete examples.
+
+Use practical instruction.
+
+Use evidence-based explanations.
+
+---
+
+FINAL VALIDATION
+
+Before publishing:
+
+Check:
+
+- Keyword stuffing
+- Excessive repetition
+- Robotic phrasing
+- Generic AI writing patterns
+- Filler content
+
+Rewrite weak sections automatically.
+
+The final content should read like it was written by an experienced human expert, not an AI system.

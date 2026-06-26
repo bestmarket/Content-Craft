@@ -3410,82 +3410,6 @@ Return ONLY valid JSON:
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// MARKETING KIT GENERATOR — FB Ads, TikTok, YouTube, Twitter, Selling Guide
-// ─────────────────────────────────────────────────────────────────────────────
-async function generateMarketingKit(topic: string, bundle: any): Promise<any | null> {
-  const systemPrompt = `You are an elite digital product marketing expert specializing in AI prompt packs. Return ONLY valid JSON without code blocks or markdown fencing.`;
-  const prompt = `Create a complete marketing kit for this AI prompt pack:
-
-Title: "${bundle.packageTitle}"
-Topic: "${topic}"
-Tagline: "${bundle.tagline}"
-Platform: "${bundle.platform}"
-Audience angle: "${bundle.angle}"
-Recommended Price: ${bundle.pricingRecommended}
-Total Prompts: ${bundle.totalPrompts}
-Industry: ${bundle.industry}
-
-Return ONLY this JSON (no markdown):
-{
-  "facebookAds": [
-    {"angle":"pain_point","headline":"max 40 chars","primaryText":"180-220 word Facebook ad: hook/problem/solution/social proof/CTA","description":"under 30 words","cta":"Shop Now"},
-    {"angle":"social_proof","headline":"result-focused headline max 40 chars","primaryText":"180-220 word Facebook ad from social proof angle","description":"under 30 words","cta":"Learn More"},
-    {"angle":"value_stack","headline":"value headline max 40 chars","primaryText":"180-220 word Facebook ad stacking value and scarcity","description":"under 30 words","cta":"Get Access Now"}
-  ],
-  "tiktokScript": {
-    "hook":"First 3 seconds — scroll-stopping opener max 15 words",
-    "body":"20-35 second script — conversational, show value, relatable",
-    "cta":"Final 5 seconds — one clear action",
-    "caption":"TikTok caption 100-150 words with energy",
-    "hashtags":["tag1","tag2","tag3","tag4","tag5","tag6"],
-    "videoIdeas":["Video concept 1","Video concept 2","Video concept 3"]
-  },
-  "youtubeScript": {
-    "title":"SEO-optimized YouTube title that compels clicks",
-    "thumbnailConcept":"Thumbnail description: text overlay, background, emotion/reaction",
-    "intro":"0-45 second hook — why they must watch the whole video",
-    "mainContent":"45s-4min — demonstrate value, show sample prompts working, overcome top 3 objections",
-    "cta":"Final 30 seconds — urgency-driven buy now with bonus",
-    "description":"300-word YouTube video description with keywords, timestamps placeholder, and link"
-  },
-  "twitterPosts": [
-    {"tweet":"Launch announcement under 280 chars — punchy and exciting","label":"Launch"},
-    {"tweet":"Value/tip tweet that teases the bundle without giving it all away","label":"Value Hook"},
-    {"tweet":"Result/proof tweet — specific outcome someone got under 280 chars","label":"Social Proof"},
-    {"tweet":"Direct offer tweet with link placeholder and urgency","label":"Direct Offer"},
-    {"tweet":"Story tweet — personal connection to the topic that sells the dream","label":"Story"}
-  ],
-  "monetizationGuide": {
-    "pricingStrategy":"2-3 sentence specific pricing strategy for this niche — tiered/bundle pricing advice",
-    "whereToSell":[
-      {"platform":"Gumroad","why":"why Gumroad suits this niche specifically","steps":"Step 1. Step 2. Step 3."},
-      {"platform":"Etsy Digital","why":"why Etsy buyers look for this","steps":"Step 1. Step 2. Step 3."},
-      {"platform":"Your Own Store","why":"why owned channels scale best","steps":"Step 1. Step 2. Step 3."}
-    ],
-    "first24Hours":["Specific action 1","Specific action 2","Specific action 3","Specific action 4","Specific action 5"],
-    "scalingStrategy":["Scaling tip 1 — specific tactic","Scaling tip 2 — specific tactic","Scaling tip 3 — specific tactic"],
-    "monthlyRevenueTarget":"Realistic $X–$Y/month estimate with short explanation of how to hit it"
-  },
-  "quickStartChecklist":[
-    {"step":1,"task":"Specific actionable first task","time":"10 min","priority":"critical"},
-    {"step":2,"task":"Specific actionable second task","time":"15 min","priority":"critical"},
-    {"step":3,"task":"Specific actionable third task","time":"20 min","priority":"high"},
-    {"step":4,"task":"Specific actionable fourth task","time":"30 min","priority":"high"},
-    {"step":5,"task":"Specific actionable fifth task","time":"45 min","priority":"medium"},
-    {"step":6,"task":"Specific actionable sixth task","time":"60 min","priority":"medium"},
-    {"step":7,"task":"Ongoing daily habit to grow sales","time":"15 min/day","priority":"medium"}
-  ]
-}`;
-
-  try {
-    const r = await callGeminiFallback([{ role: "user", content: prompt }], systemPrompt, 4500, "prompt");
-    if (!r?.text) return null;
-    const jsonStr = r.text.match(/\{[\s\S]*\}/s)?.[0];
-    return jsonStr ? JSON.parse(jsonStr) : null;
-  } catch { return null; }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
 // ROUTES
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -3608,8 +3532,6 @@ router.post("/prompt-packages/generate", requireAuth, async (req: any, res) => {
     if (assetList.includes("salesPage")) assetTasks.salesPage = generatePromptSalesPage(params.topic, bundle);
     if (assetList.includes("emailSequence")) assetTasks.emailSequence = generatePromptEmailSequence(params.topic, bundle);
     if (assetList.includes("socialPosts")) assetTasks.socialPosts = generatePromptSocialPosts(params.topic, bundle);
-    // Always generate the marketing kit — it's core to the value proposition
-    assetTasks.marketingKit = generateMarketingKit(params.topic, bundle);
 
     const assetResults: Record<string, any> = {};
     if (Object.keys(assetTasks).length > 0) {
@@ -3623,13 +3545,12 @@ router.post("/prompt-packages/generate", requireAuth, async (req: any, res) => {
 
     const studioBundle = {
       _studio: true,
-      _v: 3,
+      _v: 2,
       params: { topic: params.topic, angle: params.angle, platform: params.platform, industry: params.industry, bundleSize: params.bundleSize, authorName, selectedAssets: assetList },
       bundle,
       salesPage: assetResults.salesPage ?? null,
       emailSequence: assetResults.emailSequence ?? null,
       socialPosts: assetResults.socialPosts ?? null,
-      marketingKit: assetResults.marketingKit ?? null,
     };
 
     // Save to DB
@@ -3722,11 +3643,10 @@ router.get("/prompt-packages/:id", requireAuth, async (req: any, res) => {
     if (!product) { res.status(404).json({ error: "Not found" }); return; }
 
     const parsed = JSON.parse(product.description ?? "{}");
-    const coverImageUrl = (product as any).coverImageUrl ?? null;
     if (parsed._studio) {
-      res.json({ id: product.id, publishStatus: product.publishStatus, price: product.price, coverImageUrl, ...parsed });
+      res.json({ id: product.id, publishStatus: product.publishStatus, price: product.price, ...parsed });
     } else {
-      res.json({ id: product.id, publishStatus: product.publishStatus, price: product.price, coverImageUrl, bundle: parsed });
+      res.json({ id: product.id, publishStatus: product.publishStatus, price: product.price, bundle: parsed });
     }
   } catch (error) {
     logger.error({ err: error }, "Error fetching prompt package:");
@@ -3750,9 +3670,7 @@ router.post("/prompt-packages/:id/publish", requireAuth, async (req: any, res) =
 
     let bundle: PromptBundle;
     try {
-      const parsed = JSON.parse(product.description ?? "{}");
-      // studioBundle stores the actual PromptBundle one level deeper under `bundle`
-      bundle = (parsed.bundle ?? parsed) as PromptBundle;
+      bundle = JSON.parse(product.description ?? "{}") as PromptBundle;
     } catch {
       res.status(400).json({ error: "Invalid bundle data" }); return;
     }
@@ -3946,27 +3864,6 @@ router.post("/admin/prompt-packages/:id/reject", requireAdmin, async (req: any, 
   }
 });
 
-// GET /api/prompt-packages/:id/preview — view HTML in browser (no download header)
-router.get("/prompt-packages/:id/preview", requireAuth, async (req: any, res) => {
-  try {
-    const id = parseInt(req.params.id);
-    const [product] = await db
-      .select()
-      .from(productsTable)
-      .where(and(eq(productsTable.id, id), eq(productsTable.userId, req.userId)))
-      .limit(1);
-    if (!product) { res.status(404).send("<h1>Not found</h1>"); return; }
-    const parsed = JSON.parse(product.description ?? "{}");
-    const bundle = parsed.bundle ?? parsed;
-    const html = generatePDFHTML(bundle);
-    res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.send(html);
-  } catch (error) {
-    logger.error({ err: error }, "Error generating prompt preview");
-    res.status(500).send("<h1>Error generating preview</h1>");
-  }
-});
-
 // GET /api/prompt-packages/:id/download — download as HTML/PDF
 router.get("/prompt-packages/:id/download", requireAuth, async (req: any, res) => {
   try {
@@ -3979,12 +3876,9 @@ router.get("/prompt-packages/:id/download", requireAuth, async (req: any, res) =
 
     if (!product) { res.status(404).json({ error: "Not found" }); return; }
 
-    const _parsed = JSON.parse(product.description ?? "{}");
-    // studioBundle stores the actual PromptBundle one level deeper under `bundle`
-    const bundle = (_parsed.bundle ?? _parsed) as PromptBundle;
+    const bundle = JSON.parse(product.description ?? "{}") as PromptBundle;
     const html = generatePDFHTML(bundle);
-    const title = bundle.packageTitle ?? "prompt-pack";
-    const filename = title.replace(/[^a-z0-9\s]/gi, "").replace(/\s+/g, "-").slice(0, 60);
+    const filename = bundle.packageTitle.replace(/[^a-z0-9\s]/gi, "").replace(/\s+/g, "-").slice(0, 60);
 
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.setHeader("Content-Disposition", `attachment; filename="${filename}.html"`);

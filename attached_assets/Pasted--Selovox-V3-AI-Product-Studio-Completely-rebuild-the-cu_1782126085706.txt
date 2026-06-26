@@ -1,0 +1,512 @@
+# Selovox V3 – AI Product Studio
+
+ 
+Completely rebuild the current Product Generator without breaking the existing database, subscriptions, user accounts, or UI structure.
+ 
+The current PDF output feels code-generated and low quality. Replace the entire generation pipeline with an AI-first architecture that creates premium, visually appealing products similar to professional ebooks sold on Gumroad, Canva templates, Kindle guides, and coaching programs.
+ 
+This is not a PDF generator.
+ 
+This is an AI Product Studio that creates complete digital products and separate marketing assets.
+ 
+Use the AI provider selected in Admin (Gemini by default) and ensure API keys are loaded correctly.
+ 
+Never display false "API key not set" errors.
+ 
+Always validate API configuration before generation.
+  
+# Product Creation Interface
+ 
+Create a modern wizard.
+ 
+### Step 1: Product Setup
+ 
+Fields:
+ 
+ 
+- Product Title
+ 
+- Description
+ 
+- Target Audience
+ 
+- Problem Solved
+ 
+
+ 
+Category selector:
+ 
+ 
+- Business
+ 
+- AI
+ 
+- Marketing
+ 
+- Finance
+ 
+- Health
+ 
+- Fitness
+ 
+- Real Estate
+ 
+- Crypto
+ 
+- Education
+ 
+- Relationships
+ 
+- Parenting
+ 
+- Self Improvement
+ 
+
+ 
+Writing style:
+ 
+ 
+- Educational
+ 
+- Professional
+ 
+- Storytelling
+ 
+- Actionable
+ 
+- Premium Coaching
+ 
+
+ 
+Direction angle:
+ 
+ 
+- Ultimate Guide
+ 
+- Step-by-Step Blueprint
+ 
+- Workbook
+ 
+- Expert Handbook
+ 
+- Masterclass
+ 
+- Transformation Journey
+ 
+- Checklist Style
+ 
+- Challenge Format
+ 
+
+ 
+Tone:
+ 
+ 
+- Friendly
+ 
+- Authority
+ 
+- Luxury
+ 
+- Motivational
+ 
+- Corporate
+ 
+
+ 
+Page count:
+ 
+20
+ 
+50
+ 
+80
+ 
+120
+ 
+200
+ 
+Visual theme:
+ 
+ 
+- Modern
+ 
+- Luxury
+ 
+- Dark
+ 
+- Minimal
+ 
+- Blue Corporate
+ 
+- Elegant
+ 
+
+ 
+Image source:
+ 
+ 
+- Gemini image generation
+ 
+- Unsplash
+ 
+- Pexels
+ 
+- Pixabay
+ 
+
+ 
+Allow the user to select which assets to generate.
+ 
+Checkboxes:
+ 
+✓ Ebook
+ 
+✓ Cover image
+ 
+✓ Product mockup
+ 
+✓ Worksheets
+ 
+✓ Bonuses
+ 
+✓ Email sequence
+ 
+✓ Facebook guide
+ 
+✓ Facebook ads guide
+ 
+✓ YouTube guide
+ 
+✓ TikTok guide
+ 
+✓ Sales page
+ 
+✓ Landing page
+ 
+✓ Lead magnet
+ 
+✓ Social posts
+ 
+✓ CTA library
+ 
+Nothing should be forced.
+  
+# Quality Content Generation
+ 
+Use Gemini for structured JSON output.
+ 
+Generate:
+ 
+ 
+- Title
+ 
+- Subtitle
+ 
+- Chapters
+ 
+- Introduction
+ 
+- Main lessons
+ 
+- Examples
+ 
+- Worksheets
+ 
+- Action plans
+ 
+- Checklists
+ 
+- FAQ
+ 
+- Bonuses
+ 
+- Summary
+ 
+
+ 
+Never produce filler content.
+ 
+Write as an expert.
+ 
+Prioritize depth and value.
+ 
+Use research-based information and trusted sources.
+ 
+Use:
+ 
+ 
+- Google Search grounding
+ 
+- Gemini grounding capabilities
+ 
+- Wikipedia
+ 
+- PubMed for health
+ 
+- Government websites
+ 
+- HubSpot
+ 
+- Ahrefs
+ 
+- Google documentation
+ 
+- Meta documentation
+ 
+- YouTube Creator resources
+ 
+
+ 
+Cite sources internally and convert them into educational explanations.
+ 
+Avoid hallucinations.
+  
+# Generation Experience
+ 
+Replace boring progress bars.
+ 
+Stage 1
+ 
+Market Research
+ 
+Display:
+ 
+"Analyzing demand and audience needs..."
+ 
+Educational tip:
+ 
+"People buy solutions, not information."
+  
+Stage 2
+ 
+Building Product Blueprint
+ 
+Show chapters appearing live.
+  
+Stage 3
+ 
+Writing Premium Content
+ 
+Display previews.
+  
+Stage 4
+ 
+Creating Visual Assets
+ 
+Generate:
+ 
+ 
+- Cover
+ 
+- Chapter illustrations
+ 
+- Icons
+ 
+
+ 
+Use quality images from:
+ 
+Unsplash
+ 
+Pexels
+ 
+Pixabay
+ 
+Gemini image generation
+ 
+Avoid placeholders.
+  
+Stage 5
+ 
+Creating Marketing Assets
+ 
+Generate separately:
+ 
+Facebook strategy
+ 
+Facebook ads
+ 
+YouTube strategy
+ 
+TikTok strategy
+ 
+Instagram content
+ 
+X content
+ 
+Pinterest ideas
+ 
+Sales scripts
+ 
+CTA library
+ 
+Lead magnet ideas
+  
+Stage 6
+ 
+Creating Email Sequence
+ 
+Generate:
+ 
+30-day email sequence
+ 
+Welcome emails
+ 
+Value emails
+ 
+Promotional emails
+ 
+Closing emails
+ 
+These must remain separate from the ebook.
+  
+Stage 7
+ 
+Premium Layout Engine
+ 
+DO NOT use jsPDF or simple PDF templates.
+ 
+Build HTML pages first.
+ 
+Use:
+ 
+HTML + Tailwind + CSS
+ 
+Convert with Puppeteer or Playwright.
+ 
+Create:
+ 
+Cover page
+ 
+Table of contents
+ 
+Section dividers
+ 
+Icons
+ 
+Cards
+ 
+Callout boxes
+ 
+Quotes
+ 
+Images
+ 
+Headers
+ 
+Footers
+ 
+Proper typography
+ 
+Color themes
+ 
+Page breaks
+ 
+Design should resemble:
+ 
+Canva
+ 
+Gumroad products
+ 
+HubSpot lead magnets
+ 
+Professional Kindle books
+  
+# Separate Assets
+ 
+Never merge everything together.
+ 
+Create independent assets:
+ 
+ebook.pdf
+ 
+email-sequence.pdf
+ 
+facebook-guide.pdf
+ 
+youtube-guide.pdf
+ 
+tiktok-guide.pdf
+ 
+sales-page.pdf
+ 
+social-posts.pdf
+ 
+worksheets.pdf
+ 
+bonuses.pdf
+ 
+Each asset should have:
+ 
+Preview
+ 
+Edit
+ 
+Regenerate
+ 
+Download
+ 
+Publish
+  
+# Product Vault
+ 
+Save every asset permanently.
+ 
+Allow regeneration of:
+ 
+Only cover
+ 
+Only images
+ 
+Only chapters
+ 
+Only email sequence
+ 
+Only marketing assets
+ 
+Only social posts
+ 
+Without recreating the entire product.
+  
+# Smart Publishing
+ 
+Buttons:
+ 
+Publish Product
+ 
+Publish Product + Sales Page
+ 
+Generate Funnel
+ 
+Create Membership
+ 
+Create Affiliate Program
+ 
+Generate Upsells
+  
+# Quality Requirements
+ 
+Everything must feel premium.
+ 
+Never output plain text PDFs.
+ 
+Never use placeholder images.
+ 
+Never zip marketing assets inside the main ebook.
+ 
+Users should feel like they hired:
+ 
+A writer
+ 
+A designer
+ 
+A marketer
+ 
+A publisher
+ 
+And an editor
+ 
+inside Selovox.
+ 
+The goal is to create business assets, not documents.

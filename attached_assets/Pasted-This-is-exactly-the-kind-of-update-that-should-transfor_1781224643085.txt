@@ -1,0 +1,574 @@
+This is exactly the kind of update that should transform your PDF engine from a simple content generator into a premium digital product creation system. Copy and paste this entire prompt into Replit:
+
+:::writing{variant="document" id="58241"}
+
+🚀 ULTIMATE PDF PRODUCT ENGINE UPGRADE (HIGHEST PRIORITY)
+
+The PDF Product Generator is the core feature and primary value of this platform.
+
+The goal is NOT to generate information.
+
+The goal is to generate professional digital products that people would confidently sell online.
+
+Every generated PDF should feel like a premium ebook, blueprint, training guide, workbook, playbook, toolkit, or course companion.
+
+Quality is more important than speed.
+
+
+---
+
+🎯 USER EXPERIENCE
+
+The user should only provide:
+
+Product Title
+
+Product Idea
+
+Author Name
+
+Author Image (optional)
+
+Product Style
+
+Page Count (10, 20, 30, 50+)
+
+Cover Design Style
+
+
+The user should NOT need to:
+
+Create outlines
+
+Create chapters
+
+Research information
+
+Design covers
+
+Organize content
+
+
+The AI must do everything automatically.
+
+
+---
+
+🧠 STAGE 1: TOPIC ANALYSIS ENGINE
+
+Before writing anything:
+
+Analyze:
+
+Topic
+
+Audience
+
+Skill level
+
+Desired outcome
+
+Pain points
+
+Motivations
+
+Expected transformation
+
+
+Generate:
+
+Audience profile
+
+Core problem
+
+Core promise
+
+Desired result
+
+
+The system must understand the topic before generating content.
+
+
+---
+
+🔍 STAGE 2: RESEARCH ENGINE
+
+Before creating content:
+
+Perform deep topic research.
+
+Gather:
+
+Core concepts
+
+Best practices
+
+Industry knowledge
+
+Frequently asked questions
+
+Real-world examples
+
+Common mistakes
+
+Action strategies
+
+Current trends
+
+
+Build a complete knowledge context before writing.
+
+Never start writing immediately.
+
+Research first.
+
+Structure second.
+
+Write third.
+
+
+---
+
+🏗 STAGE 3: PRODUCT ARCHITECT ENGINE
+
+Create:
+
+Product Title
+
+Subtitle
+
+Product Promise
+
+Table of Contents
+
+Chapter Framework
+
+Learning Path
+
+Bonus Sections
+
+FAQ Sections
+
+Action Plan Sections
+
+
+Every product must have a logical progression.
+
+
+---
+
+📚 STAGE 4: CHAPTER PLANNING ENGINE
+
+For each chapter:
+
+Generate:
+
+Objective
+
+Key concepts
+
+Action steps
+
+Examples
+
+Checklist
+
+Summary
+
+
+Only after planning should writing begin.
+
+
+---
+
+✍️ STAGE 5: PREMIUM CONTENT WRITING ENGINE
+
+Write chapters individually.
+
+Never generate the entire PDF in one response.
+
+Every chapter must include:
+
+Explanations
+
+Examples
+
+Practical advice
+
+Action steps
+
+Checklists
+
+Frameworks
+
+Common mistakes
+
+Expert tips
+
+Real implementation guidance
+
+
+Avoid:
+
+Generic statements
+
+Filler
+
+Repetition
+
+Empty motivation
+
+Fluff
+
+
+The content should feel like a paid product.
+
+
+---
+
+🚫 REMOVE ALL AI BEHAVIOR
+
+Never use:
+
+"As an AI"
+
+"I am an AI language model"
+
+AI disclaimers
+
+Robotic phrasing
+
+Generic AI wording
+
+Overly formal AI writing patterns
+
+
+The writing must feel:
+
+Human
+
+Natural
+
+Conversational
+
+Expert
+
+Trustworthy
+
+
+The reader should never feel AI generated the content.
+
+
+---
+
+💡 HUMAN WRITING STANDARD
+
+Write like:
+
+A professional author
+
+A subject matter expert
+
+A successful educator
+
+A premium course creator
+
+
+Use:
+
+Storytelling
+
+Practical examples
+
+Emotional understanding
+
+Human insights
+
+Real-world application
+
+
+Do not sound like a chatbot.
+
+
+---
+
+🎨 STAGE 6: VISUAL CONTENT ENGINE
+
+Automatically generate:
+
+Image placement plan
+
+Image descriptions
+
+Image captions
+
+
+Support:
+
+Cover images
+
+Chapter images
+
+Full width images
+
+Infographics
+
+Feature callouts
+
+
+Use integrated image APIs.
+
+Users may:
+
+Upload images
+
+Replace images
+
+Remove images
+
+
+
+---
+
+📖 PDF STRUCTURE STANDARD
+
+Every PDF should include:
+
+1 Cover Page
+
+2 About This Guide
+
+3 Table of Contents
+
+4 Introduction
+
+5 Core Chapters
+
+6 Frameworks
+
+7 Worksheets
+
+8 Checklists
+
+9 Frequently Asked Questions
+
+10 Resources Section
+
+11 Bonus Section
+
+12 30-Day Action Plan
+
+13 Conclusion
+
+14 About The Author
+
+15 Final CTA
+
+
+---
+
+📋 PREMIUM VALUE COMPONENTS
+
+Automatically add:
+
+Quick Start Page
+
+Show readers exactly what to do first.
+
+Common Mistakes Section
+
+Show what causes failure.
+
+Success Framework
+
+Create a repeatable framework.
+
+Action Workbook
+
+Provide fillable exercises.
+
+Resource Vault
+
+Provide useful tools and resources.
+
+Progress Tracker
+
+Allow readers to track progress.
+
+These increase perceived value significantly.
+
+
+---
+
+💰 SELLABILITY ANALYZER
+
+After generation:
+
+Run a Sellability Audit.
+
+Evaluate:
+
+Market demand
+
+Clarity
+
+Practical value
+
+Depth
+
+Transformation potential
+
+Product completeness
+
+
+Generate:
+
+Sellability Score (0-100)
+
+
+---
+
+🔥 PRODUCT IMPROVEMENT MODE
+
+If Sellability Score is below 85:
+
+Display:
+
+"Product can be improved."
+
+Show:
+
+Weak sections
+
+Missing sections
+
+Improvement recommendations
+
+
+Add button:
+
+Improve Product
+
+When clicked:
+
+AI automatically:
+
+Expands weak chapters
+
+Adds missing frameworks
+
+Adds worksheets
+
+Adds examples
+
+Adds resources
+
+Improves product value
+
+
+Recalculate score.
+
+
+---
+
+📄 CLEAN OUTPUT SYSTEM
+
+Never allow:
+
+JSON
+
+Code blocks
+
+Markdown syntax
+
+Prompt text
+
+System instructions
+
+Template placeholders
+
+API messages
+
+Debug information
+
+
+inside generated PDFs.
+
+PDF output must always be clean and professional.
+
+
+---
+
+📑 PAGE COUNT VALIDATION
+
+If user requests:
+
+10 pages
+
+Generate enough content to realistically fill 10 pages.
+
+If user requests:
+
+20 pages
+
+Generate enough content to realistically fill 20 pages.
+
+Do not generate fewer pages than requested.
+
+
+---
+
+🏆 QUALITY CONTROL ENGINE
+
+Before export:
+
+Evaluate:
+
+Readability
+
+Formatting
+
+Relevance
+
+Depth
+
+Completeness
+
+Human writing quality
+
+Visual quality
+
+Sellability
+
+
+If quality score is low:
+
+Regenerate weak sections automatically.
+
+Never export low-quality PDFs.
+
+
+---
+
+🎯 FINAL GOAL
+
+Every generated PDF should look and feel like:
+
+A premium ebook
+
+A paid digital product
+
+A professional blueprint
+
+A training guide
+
+A workbook
+
+A course companion
+
+
+The final product should be something a creator would confidently sell to customers.
+
+The PDF engine is the most important feature in the entire platform and must always prioritize quality, depth, readability, value, and sellability over generation speed. :::
+
+This prompt gives Replit a complete workflow: Research → Planning → Writing → Visuals → Sellability Audit → Improvement → Export, which is how professional publishers create premium digital products. The biggest additions are the Sellability Analyzer, Improve Product button, human-writing standards, and automatic quality control, because those are what move a PDF from "AI content" to "something people will actually pay for."

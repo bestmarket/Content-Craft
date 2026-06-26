@@ -1,8 +1,10 @@
-modules = ["nodejs-24"]
+modules = ["nodejs-20", "python-3.11", "web"]
 
 [deployment]
 router = "application"
-deploymentTarget = "autoscale"
+deploymentTarget = "vm"
+run = ["bash", "-c", "cd artifacts/voice-engine && uvicorn main:app --host 0.0.0.0 --port 8099 & cd /home/runner/workspace && PORT=8080 NODE_ENV=production node --enable-source-maps artifacts/api-server/dist/index.mjs"]
+build = ["bash", "-c", "pip install fastapi==0.115.5 uvicorn==0.32.1 python-multipart==0.0.19 'pydantic>=2.0' Pillow numpy==2.1.3 soundfile==0.12.1 pydub==0.25.1 kokoro-onnx==0.4.0 onnxruntime==1.20.1 -q && python3 artifacts/voice-engine/download_models.py && pnpm --filter @workspace/content-studio run build && pnpm --filter @workspace/api-server run build"]
 
 [deployment.postBuild]
 args = ["pnpm", "store", "prune"]
@@ -11,10 +13,62 @@ env = { "CI" = "true" }
 [workflows]
 runButton = "Project"
 
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Voice Engine"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Voice Engine"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd artifacts/voice-engine && pip install --force-reinstall fastapi==0.115.5 uvicorn==0.32.1 python-multipart==0.0.19 pydantic>=2.0 Pillow numpy==2.1.3 soundfile==0.12.1 pydub==0.25.1 kokoro-onnx==0.4.0 onnxruntime==1.20.1 -q && uvicorn main:app --host 0.0.0.0 --port 8099"
+waitForPort = 8099
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pnpm --filter @workspace/api-server run build && pnpm --filter @workspace/api-server run start"
+waitForPort = 5000
+
 [agent]
-stack = "PNPM_WORKSPACE"
+stack = "BEST_EFFORT_FALLBACK"
 expertMode = true
+integrations = ["javascript_gemini_ai_integrations:2.0.0"]
 
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 20000
+
+[nix]
+channel = "stable-25_05"
+packages = ["ffmpeg-full", "freetype", "lcms2", "libimagequant", "libjpeg", "libsndfile", "libtiff", "libwebp", "libxcrypt", "oneDNN", "openjpeg", "re2", "tcl", "tk", "zlib"]
+
+[userenv]
+
+[userenv.shared]
+PORT = "5000"
+NODE_ENV = "development"
+PYTHON3_PATH = "/nix/store/flbj8bq2vznkcwss7sm0ky8rd0k6kar7-python-wrapped-0.1.0/bin/python3"
+ADMIN_PASSWORD = "Admin@ViralCraft2025"
+SEED_SECRET = "viralcraft-seed-secret"
+CRON_SECRET = "viralcraft-cron-secret"

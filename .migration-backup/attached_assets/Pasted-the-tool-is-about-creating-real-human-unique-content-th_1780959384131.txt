@@ -1,0 +1,42 @@
+the tool is about creating real human unique content that will not dictate any single ai flow in it, it will be capable to go viral because of its uniqueness algorythm. the system will have user and admin dashboard, the interface will look so attractive with scrol beautiful animations to hook visitors, include features lists with beautiul write ups 
+
+it will feature popular social media platforms such as youtube, facebook, tiktok, instagram, twitter.
+
+in the admin panel, creat a prompt library
+section where i can add, edit, and label different prompt styles
+(for example: "Professional Tone," "Conversational," "Story-Based," commedic and humoriuos tone
+etc.). Then on the user dashboard, you just display those options as a
+style selector and whichever one the user picks, that style's prompt
+gets passed to Claude in the backend. also add a seperate place to put prompt for thumbnail style creation from the system. add the thumbnail output to the youtube, tiktok content output section
+
+for youtube and tiktok content script option, add feature to model high qaulity viral content from youtube or tiktok link so that user can paste about 5 video links and select model this video, and system will model the video and product more qaulity script using the systems uniques scripting style that can go viral fast.
+
+add section for creating high qaulity informed digital pdf well arranged premium high class downloadable pdf, the user imput topic or description and author name the system generated the entire content including the the table of content, about and author, also add in the admin dashboard a place to put the designed prompt to handle this output and generate cintent from the api activated in the system.
+
+
+"Create an admin panel
+with a prompt management section where I can add different writing
+styles with a name and system prompt for each. Users should be able to
+select a style from their dashboard before generating content."
+
+add place in admin where to manually put api such as claud, openai and gemini apis, also add payment options apis imput in the admin for Paddle, Lemon Squeezy, paystack, flutterwave and crypto and can be able select "Activate" or "Deactivate"
+
+it will have feature to generate high qaulity viral thumbnail for youtube and tiktok, there will be option in the admin to add promtp and api for this, the api should feauture chatgpt image, gemini nano banana and claud apis.
+
+add for a place where user to select how many words count the content will be and how many minutes it will be if its for video.. ex. 100, 200,500,1000,1500,2000,2500,3000, 3500, 4000, 4500, 6000words... it can be downloaded as text or copy. add feature where user will select plain or diggest for the system to give only the script text or include creating video action proccess such as including image and video style prompts.
+
+the content generated should include,5 viral titles with virality score at the end of each title for the user to chose the best, the script, description, tags and hashtags
+
+
+untop of the users dashboard place an ad text "Click Here To Create your Digital Product in Minutes with ai" link it to affiliate link i will add throught the admin and i can also rewrite the text from admin pannel.
+
+in the admin add feature where i can deactivate or activate features in the site .
+
+Use high inteligent to connect all these features to make sure the work great without any error.
+
+make sure admin and users can login without any issues.
+
+add support chat in all the user dashboard and the admin can chat with user directly from the admin pannel, also create chatbot using the content of the tool to answer questions to the users or visitors.
+
+
+after the user generated the scrip, at the buttom, create dynamic button saying click to create video or audio with this content, this button will have a link leading to an external link i can add from the admin.

@@ -1,76 +1,75 @@
-# ViralCraft Studio
+# Selovox (ViralCraft Studio)
 
-An AI-powered content creation platform for digital product creators — generate viral scripts, captions, hooks, PDFs, and manage a full digital product marketplace.
+AI-powered digital product and content creation platform — turns any skill or niche into a professional digital product and high-converting storefront in 60 seconds.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 8080)
-- `pnpm --filter @workspace/content-studio run dev` — run the frontend (port 19046)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
+- `pnpm --filter @workspace/api-server run dev` — build + run the API server (port 5000, serves built frontend)
+- `pnpm --filter @workspace/api-server run build` — build the API server only
+- `pnpm --filter @workspace/content-studio run dev` — run the Vite dev server (port 5173, proxies /api to port 5000)
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- `pnpm run typecheck` — full typecheck across all packages
+- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
+- Required env: `DATABASE_URL` — Postgres connection string (auto-provisioned by Replit)
 
 ## Stack
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- Frontend: React 19 + Vite + Tailwind CSS v4 + shadcn/ui + Wouter routing
-- API: Express 5 (port 8080 in dev, /api path)
+- pnpm workspaces, Node.js 20, TypeScript 5.9
+- Frontend: React 19, Vite, Tailwind CSS 4, Radix UI (shadcn/ui), TanStack Query, Wouter, Framer Motion
+- API: Express 5, Pino logging, Multer uploads
 - DB: PostgreSQL + Drizzle ORM
-- Auth: JWT + bcryptjs (custom auth in api-server)
-- Validation: Zod (`zod/v4`), `drizzle-zod`
+- Voice Engine: Python FastAPI + Kokoro ONNX TTS (port 8099)
+- Validation: Zod, drizzle-zod
 - API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Build: esbuild (ESM bundle)
 
 ## Where things live
 
-- `artifacts/content-studio/src/pages/` — all frontend pages
-- `artifacts/content-studio/src/components/` — shared UI components
-- `artifacts/api-server/src/routes/` — all API route handlers
-- `artifacts/api-server/src/data/` — static trending/template data
-- `lib/db/src/schema/` — all Drizzle DB table definitions
-- `lib/api-spec/openapi.yaml` — OpenAPI contract (source of truth)
-- `lib/api-client-react/src/generated/` — generated React Query hooks
-- `lib/api-zod/src/generated/` — generated Zod schemas
-- `vercel.json` — Vercel deployment config
-- `api/handler.mjs` — Vercel serverless function entry point
+- `artifacts/api-server/src/` — Express backend
+  - `routes/` — all API routes
+  - `lib/scryvox/` — AI content generation engine
+  - `lib/r2Storage.ts` — Cloudflare R2 file uploads
+  - `services/email.ts` — SMTP email service
+  - `seed.ts` — admin user + default data seeding
+  - `scheduler.ts` — automation scheduler
+- `artifacts/content-studio/src/` — React frontend
+- `artifacts/voice-engine/` — Python TTS service
+- `lib/db/src/schema/` — Drizzle database schema (source of truth)
+- `lib/api-spec/` — OpenAPI 3.1 spec (source of truth for API contracts)
+- `lib/api-client-react/` — generated React hooks (do not edit manually)
+- `lib/api-zod/` — generated Zod schemas (do not edit manually)
+- `public/` — built frontend assets (served by Express in production)
 
 ## Architecture decisions
 
-- JWT auth stored in localStorage; all API calls include Bearer token via `setAuthTokenGetter`
-- In dev (Replit), API calls use relative `/api` path proxied by Vite to port 8080
-- In production (Vercel), `VITE_API_URL` points to the Railway API server
-- Frontend builds to `/public/` directory which is also the Vercel output directory
-- DB schema push (not migrations) used for dev; Replit Publish handles prod schema changes
+- The API server serves the built frontend statically in production; in dev it proxies to Vite on port 5173.
+- AI keys (Gemini, OpenAI, Anthropic, Groq) are stored in the DB `api_keys` table (admin panel → API Keys) with round-robin rotation. Falls back to env vars `GEMINI_API_KEY`, `OPENAI_API_KEY`, etc.
+- Auth is custom JWT/bcrypt — no external auth provider. Admin credentials seeded from `ADMIN_PASSWORD` env var.
+- File uploads go to Cloudflare R2 (optional) — requires `CLOUDFLARE_R2_*` env vars. Falls back gracefully if not configured.
+- Google OAuth login requires `GOOGLE_CLIENT_ID` env var. Optional feature.
+- SMTP email requires `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, `SMTP_PORT` env vars. Optional feature.
 
 ## Product
 
-ViralCraft Studio is a full digital product marketplace and content creation platform:
-- AI content generation (scripts, captions, hooks, hooks)
-- PDF generation and download
-- Digital product marketplace (create, list, sell products)
-- Course creation and delivery
-- Affiliate program management
-- Email marketing automations
-- Credit/wallet system for AI usage
-- Admin dashboard
+- **Digital Product Creator**: AI-generates premium PDFs, guides, scripts via Scryvox engine
+- **Marketing Suite**: Viral thumbnails, video scripts, landing pages
+- **SaaS Builder**: AI Dev Studio workspace IDE for building mini-SaaS apps
+- **Store & Checkout**: Product listings, custom offers, checkout flows
+- **Affiliate Portal**: Affiliate program management and withdrawals
+- **Voice Engine**: Text-to-speech with Kokoro ONNX (port 8099)
 
 ## User preferences
 
-- App imported from GitHub: https://github.com/bestmarket/Content-Craft
-- Deployed on Vercel (static frontend) + Railway (API server)
-- Git remote is set to origin → github.com/bestmarket/Content-Craft for push-to-deploy
+_Populate as you build — explicit user instructions worth remembering across sessions._
 
 ## Gotchas
 
-- `VITE_PORT` is used in the original repo's vite.config — this workspace uses `PORT` (injected by the artifact system). Keep vite.config.ts using `PORT`.
-- API proxy in vite.config targets port 8080 (not 5000 as in original repo)
-- Cloudflare R2 not configured in dev — file uploads are unavailable without `R2_*` env vars
-- Voice engine artifact (kokoro ONNX model) was excluded — it relies on Git LFS which exceeded budget on the source repo
-- Always run `pnpm --filter @workspace/db run push` after schema changes before restarting the API server
+- After changing DB schema, always run `pnpm --filter @workspace/db run push` to apply changes.
+- After changing API routes or OpenAPI spec, run `pnpm --filter @workspace/api-spec run codegen` to regenerate hooks.
+- The `public/` folder is the built frontend — run `pnpm --filter @workspace/content-studio run build` to update it.
+- Voice Engine installs Python deps on startup (see `.replit` workflow). First start may be slow.
+- AI image generation falls back to Pollinations.ai (free, URL-based) if no Gemini key is configured.
 
 ## Pointers
 
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
-- To push changes to GitHub (triggering Vercel redeploy): connect your GitHub account via the Replit integrations panel, then I can use `gitPush` to push
+- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.

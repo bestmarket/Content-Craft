@@ -1,0 +1,343 @@
+
+
+Upgrade the current application into a complete AI Digital Product Creation + Selling + Monetization Platform.
+
+The system must allow users to:
+
+Create sellable PDF digital products using AI
+
+Generate landing pages automatically
+
+Publish products to a hosted store
+
+Sell products using integrated checkout
+
+Generate viral marketing content for all major platforms
+
+Discover trending product opportunities
+
+Track earnings and withdraw payouts
+
+Everything must be fully connected and production-ready.
+
+📄 1. AI DIGITAL PRODUCT (PDF) BUILDER
+
+Create a “Sellable Digital Product Mode” that generates complete PDF products from a topic.
+
+Each PDF must include:
+
+Title (high converting)
+
+Subtitle
+
+Cover page (with design prompt)
+
+Table of contents
+
+Chapters (structured and useful content)
+
+Step-by-step guides
+
+Checklists
+
+Bonus section
+
+Conclusion
+
+CTA section
+
+Add:
+
+Sellability Score (0–100)
+
+Suggested pricing ($5–$50 range)
+
+Target audience
+
+Monetization potential notes
+
+User must be able to:
+
+Edit before export
+
+Download PDF
+
+🌐 2. LANDING PAGE GENERATOR
+
+For every PDF created, automatically generate a high-converting landing page.
+
+Must include:
+
+Hero headline
+
+Problem → solution section
+
+Benefits
+
+Features
+
+Testimonials (placeholder format)
+
+Pricing section
+
+CTA button
+
+Requirements:
+
+Mobile responsive
+
+Clean SaaS design
+
+High conversion copywriting
+
+🏪 3. HOSTED STORE + PRODUCT SELLING SYSTEM
+
+Each user gets a public store:
+
+/store/{username}
+
+/product/{id}
+
+When user clicks “Sell This Product”:
+
+System must:
+
+Publish product automatically
+
+Create product page
+
+Attach landing page
+
+Enable checkout button
+
+Generate shareable link
+
+Product page includes:
+
+Title
+
+Description
+
+Preview
+
+Price
+
+Buy button
+
+Trust/security section
+
+💳 4. PAYMENT SYSTEM (MULTI PROVIDER)
+
+Integrate:
+
+Paystack (Nigeria)
+
+Paddle (global SaaS)
+
+LemonSqueezy (digital products)
+
+Rules:
+
+No raw API keys from users
+
+Use secure onboarding or account connection flow
+
+Store tokens securely per user
+
+Checkout flow:
+
+User clicks buy
+
+System routes to payment provider
+
+Payment is processed securely
+
+Transaction is recorded
+
+Revenue is credited to creator wallet
+
+💰 5. WALLET + PAYOUT SYSTEM
+
+Each user has a wallet:
+
+Available balance
+
+Pending balance
+
+Paid balance
+
+Rules:
+
+Minimum withdrawal: $50
+
+Payout schedule: weekly or admin-controlled instant payout
+
+Users can add:
+
+Bank account (Paystack for Nigeria)
+
+Stripe/Paddle/LemonSqueezy payout methods
+
+Payout flow:
+
+User requests withdrawal
+
+System validates balance
+
+Payment is processed via provider
+
+Wallet is updated
+
+🔥 6. VIRAL CONTENT GENERATOR (MULTI-PLATFORM)
+
+For every product or idea, generate marketing content for:
+
+TikTok (hook + script + caption + hashtags)
+
+YouTube Shorts (title + script)
+
+YouTube long form (full structured script)
+
+Twitter/X (viral tweet + thread)
+
+Facebook post (story style)
+
+Instagram caption
+
+Rules:
+
+Human-like tone
+
+Emotional storytelling
+
+Strong hooks: 
+
+“Wait…”
+
+“Before you scroll…”
+
+“Nobody talks about this…”
+
+🚀 7. AUTOMATIC PRODUCT LAUNCH CAMPAIGN
+
+When a PDF is created, auto-generate:
+
+3 TikTok scripts
+
+2 YouTube Shorts ideas
+
+1 YouTube long video script
+
+1 Twitter thread
+
+1 Facebook post
+
+1 Instagram caption set
+
+All content must promote the same product.
+
+also include a button that says how to sell this product and make money today: when user clicks a popup overlay with high premium direct information on how and exact reality action to make money fast, facebook, google, youtube ads quick info reality sales details direction acconding to their country and strategic targeting and other powerful free traffic selling including youtube vides, tiktok,twitter, redit etc
+
+📈 8. TRENDING PRODUCT OPPORTUNITY ENGINE
+
+Add a dashboard panel showing:
+
+“🔥 Trending Product Ideas”
+
+Each suggestion includes:
+
+Product idea
+
+Why it is trending
+
+Monetization potential
+
+Difficulty score
+
+“Create This” button
+
+System sources ideas from:
+
+Platform usage trends
+
+Category clustering
+
+Market demand signals
+
+📊 9. CREATOR ANALYTICS DASHBOARD
+
+Show:
+
+Total sales
+
+Revenue earned
+
+Views per product
+
+Conversion rate
+
+Top performing products
+
+Earnings history
+
+💳 10. SUBSCRIPTION SYSTEM
+
+Plan:
+
+$29/month premium
+
+Includes:
+
+Unlimited PDF generation
+
+Unlimited landing pages
+
+Unlimited store publishing
+
+Unlimited viral campaigns
+
+Add:
+
+2-day free trial
+
+Admin-controlled feature access
+
+🔐 11. SECURITY SYSTEM
+
+Google authentication
+
+Email authentication
+
+Rate limiting
+
+Disposable email blocking
+
+Anti-multi-account protection
+
+Fraud prevention for payouts
+
+📱 12. UI REQUIREMENTS
+
+Mobile-first SaaS dashboard:
+
+Main tabs:
+
+Create Product
+
+My Store
+
+Earnings
+
+Trending Ideas
+
+Must be clean, fast, and easy to use.
+
+⚙️ FINAL SYSTEM RULE
+
+Everything must be fully connected:
+
+PDF → Landing Page → Store → Checkout → Wallet → Payout → Viral Campaign → Growth Loop
+
+The system must function as a complete AI business creation and monetization platform, not just a content generator.
+
+

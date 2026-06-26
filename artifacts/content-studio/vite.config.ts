@@ -4,14 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
-// PORT is required for dev/preview server (injected by Replit artifact workflow).
-// During a Vite build (e.g. Vercel CI) it is not set — that's fine because
-// server.port is irrelevant for static builds. Use 5173 as a safe fallback.
-const rawPort = process.env.PORT ?? "5173";
-const port = Number(rawPort);
-if (Number.isNaN(port) || port <= 0) {
-  throw new Error(`Invalid PORT value: "${rawPort}"`);
-}
+const port = Number(process.env.VITE_PORT ?? 5173);
 const basePath = process.env.BASE_PATH ?? "/";
 
 export default defineConfig({
@@ -106,7 +99,7 @@ export default defineConfig({
     },
     proxy: {
       "/api": {
-        target: "http://localhost:8080",
+        target: "http://localhost:5000",
         changeOrigin: true,
       },
     },

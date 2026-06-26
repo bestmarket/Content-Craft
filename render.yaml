@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: selovox
+    runtime: node
+    buildCommand: bash render-build.sh
+    startCommand: bash render-start.sh
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_PASSWORD
+        value: Admin@ViralCraft2025
+      - key: SEED_SECRET
+        value: viralcraft-seed-secret
+      - key: CRON_SECRET
+        value: viralcraft-cron-secret
+      - key: SESSION_SECRET
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false

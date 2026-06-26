@@ -1,0 +1,149 @@
+CRITICAL PDF ENGINE UPGRADE (HIGHEST PRIORITY)
+The PDF Product Generator is currently the most important feature of this platform and must be upgraded significantly.
+Current problems:
+PDF quality is too low
+Content feels generic
+Some outputs contain broken formatting
+Some outputs contain code-like text
+Sentences are unreadable or poorly structured
+PDFs do not feel like premium products
+Layout quality is weak
+Cover pages are not professional
+Content does not justify a paid digital product
+This update is now the highest priority in the system.
+NEW PDF GENERATION STANDARD
+Every generated PDF must look like a professional digital product someone would confidently sell online.
+The system must NEVER generate:
+Raw code
+Markdown symbols in final PDF
+JSON output
+Prompt text
+AI instructions
+Broken formatting
+Placeholder text
+Incomplete sections
+Only polished, human-readable content should appear in exported PDFs.
+PREMIUM CONTENT ENGINE
+Before generating a PDF:
+The AI must first create a structured outline.
+Then generate the content section-by-section.
+Do not generate the entire PDF in one large response.
+Generate:
+Cover Page
+Table of Contents
+Introduction
+Core Chapters
+Action Steps
+Checklists
+Resources
+Bonus Section
+Conclusion
+Final CTA
+This should improve consistency and quality.
+HUMAN QUALITY WRITING RULES
+PDF content must:
+Feel professionally written
+Feel human-written
+Avoid AI sounding language
+Use natural flow
+Use examples
+Use practical advice
+Use clear explanations
+Use proper formatting
+The content should read like a paid ebook, guide, blueprint, or training manual.
+PDF QUALITY SCORING SYSTEM
+Before exporting:
+Evaluate:
+Readability
+Structure
+Completeness
+Formatting
+Practical value
+If quality score is below threshold:
+Regenerate weak sections automatically.
+Do not export low-quality PDFs.
+PDF DESIGN ENGINE
+Create premium layouts.
+Include:
+Professional typography
+Chapter headers
+Page numbering
+Section dividers
+Quote blocks
+Callout boxes
+Highlight boxes
+Checklist styling
+Summary boxes
+The PDF should look modern and premium.
+AUTOMATIC COVER PAGE GENERATOR
+Generate a professional cover page automatically.
+Include:
+Main title
+Subtitle
+Author name (user editable)
+Brand name (optional)
+High-quality cover image
+Modern layout
+COVER IMAGE SYSTEM
+Allow users to:
+Upload their own cover image
+OR
+Generate cover image automatically
+If generating automatically:
+Create a niche-specific image prompt and generate a matching cover design.
+Examples:
+Health:
+Fitness imagery
+Healthy lifestyle
+Business:
+Growth charts
+Professional visuals
+Finance:
+Wealth imagery
+Professional financial design
+Technology:
+AI and modern tech visuals
+The cover must match the niche.
+IMAGE SYSTEM INSIDE PDF
+Allow users to:
+Upload images
+Insert images into chapters
+Replace images
+Delete images
+Images should automatically fit the PDF layout.
+VISUAL CONTENT BLOCKS
+Support:
+Full-width images
+Side-by-side image sections
+Infographics
+Feature boxes
+Statistics blocks
+Callout sections
+PDF EDITOR
+Before download:
+User can edit:
+Title
+Subtitle
+Cover image
+Chapters
+Paragraphs
+Images
+CTA sections
+Changes must be saved.
+PDF EXPORT OPTIONS
+Support:
+PDF
+ODF
+Ensure exported files maintain formatting.
+DIGITAL PRODUCT QUALITY GOAL
+Every generated PDF should feel comparable to a professional product sold online.
+The final result should look like:
+Premium ebook
+Business blueprint
+Training guide
+Action plan
+Course workbook
+The PDF engine is now the core product feature and must receive the highest development priority.
+Focus on quality over speed.
+Never sacrifice quality for faster generation. :::
+This update focuses Replit on fixing the actual value of your product: producing professional, sellable PDF products instead of low-quality AI output.
